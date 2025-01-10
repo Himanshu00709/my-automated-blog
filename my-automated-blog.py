@@ -301,7 +301,7 @@ if __name__ == "__main__":
             print(f"Failed to generate post for: {keyword}")
 
     # Save blog posts to files
-    output_dir = "blog_posts"
+    output_dir = "docs"
     os.makedirs(output_dir, exist_ok=True)
 
     # Generate individual HTML files for each post
