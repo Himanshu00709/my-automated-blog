@@ -1,0 +1,111 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Automated Blog</title>
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background: hsl(47, 88%, 63%);
+                font-family: "Figtree", sans-serif;
+            }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            h1 {
+                color: #2c3e50;
+                text-align: center;
+                margin-bottom: 40px;
+            }
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            .card {
+                background: hsl(0, 0%, 100%);
+                padding: 1.2em;
+                border: solid 1px hsl(0, 0%, 7%);
+                border-radius: 20px;
+                box-shadow: 12px 12px 10px -6px rgba(0,0,0,1);
+                cursor: pointer;
+                transition: transform 0.2s, box-shadow 0.2s;
+            }
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 15px 15px 10px -6px rgba(0,0,0,1);
+            }
+            .img-head img {
+                width: 100%;
+                border-radius: 10px;
+            }
+            .card button {
+                background: hsl(47, 88%, 63%);
+                border: 0px solid;
+                font-weight: 800;
+                padding: 0.5em 1em 0.5em 1em;
+                border-radius: 5px;
+                margin-top: 1.5em;
+                cursor: pointer;
+            }
+            .published {
+                font-weight: 500;
+                font-size: 0.8em;
+                margin-top: 1em;
+            }
+            .card h1 {
+                font-size: 1.5em;
+                font-weight: 800;
+                margin-top: 1em;
+            }
+            .descr {
+                color: hsl(0, 0%, 42%);
+                font-weight: 500;
+                margin-top: 1em;
+            }
+            .author {
+                display: flex;
+                align-items: center;
+                margin-top: 1.5em;
+            }
+            .author img {
+                width: 3em;
+                border-radius: 50%;
+            }
+            .author h6 {
+                margin-left: 1em;
+                font-size: 1em;
+                font-weight: 800;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Welcome to My Automated Blog</h1>
+            <div class="grid">
+    
+                <div class="card" onclick="window.location.href='blog_post__blog_post__how_to_defrost_a_burger_patty_.html'">
+                    <div class="img-head">
+                        <img src="https://natyari.com/frontendmentor/blog-preview-card/assets/images/illustration-article.svg" alt="Header Image">
+                    </div>
+                    <button>Learning</button>
+                    <p class="published">Published 21 Dec 2023</p>
+                    <h1>Blog Post: How to Defrost a Burger Patty?</h1>
+                    <p class="descr">```html How to Defrost a Burger Patty body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; } h1, h2 { color: #333; } p { color: #555; } table { width: 100%; border-collapse: collapse...</p>
+                    <div class="author">
+                        <img src="https://natyari.com/frontendmentor/blog-preview-card/assets/images/image-avatar.webp" alt="Author">
+                        <h6>Greg Hooper</h6>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+    </body>
+    </html>
+    
