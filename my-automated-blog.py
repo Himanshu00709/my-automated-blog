@@ -42,7 +42,7 @@ def generate_blog_post(keyword):
     if html_content:
         print(f"Successfully generated content for: {keyword}")
         return {
-            "title": f"Blog Post: {keyword}",  # Use the keyword as the title
+            "title": keyword,  # Use the keyword as the title (removed "Blog Post:" prefix)
             "content": html_content
         }
     else:
@@ -117,8 +117,8 @@ def save_formatted_html(post, output_dir):
     </html>
     """
 
-    # Sanitize the filename
-    filename = sanitize_filename(f"blog_post__{post['title'].lower().replace(' ', '_')}.html")
+    # Sanitize the filename (removed "blog_post__" prefix)
+    filename = sanitize_filename(f"{post['title'].lower().replace(' ', '_')}.html")
     filepath = os.path.join(output_dir, filename)
     try:
         with open(filepath, "w", encoding="utf-8") as file:
@@ -232,8 +232,8 @@ def generate_index_html(blog_posts, output_dir):
     """
 
     for post in blog_posts:
-        # Sanitize the filename
-        filename = sanitize_filename(f"blog_post__{post['title'].lower().replace(' ', '_')}.html")
+        # Sanitize the filename (removed "blog_post__" prefix)
+        filename = sanitize_filename(f"{post['title'].lower().replace(' ', '_')}.html")
         # Extract the first few lines of meaningful text
         preview = extract_preview(post['content'])
         index_content += f"""
