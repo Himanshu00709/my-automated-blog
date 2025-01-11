@@ -863,7 +863,9 @@ def push_to_github():
 # Main script
 if __name__ == "__main__":
     keywords = [
-        "acini de pepe gluten free"
+        "acini de pepe gluten free",
+        "amaro nonino gluten free",
+        "ancient grain bread gluten free"
     ]
     output_dir = "docs"
     os.makedirs(output_dir, exist_ok=True)
