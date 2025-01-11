@@ -3,6 +3,7 @@ import os
 import re
 import subprocess
 from datetime import datetime
+from collections import defaultdict
 
 # Initialize the OpenAI client with DeepSeek API
 api_key = "sk-fe730eb5b82c40478fa6411e9f09bf1c"  # Replace with your DeepSeek API key
@@ -55,8 +56,61 @@ def generate_blog_post(keyword):
         print(f"Failed to generate content for: {keyword}")
         return None
 
+# Function to categorize posts based on keywords
+def categorize_post(title):
+    # Example categorization logic (can be customized)
+    if "gluten free" in title.lower():
+        return "food", "gluten-free"
+    elif "recipe" in title.lower():
+        return "food", "recipes"
+    elif "health" in title.lower():
+        return "lifestyle", "health"
+    else:
+        return "general", "uncategorized"
+
+# Function to generate breadcrumbs
+def generate_breadcrumbs(category, subcategory, title):
+    return f"""
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="https://gfreelife.com">Home</a></li>
+            <li class="breadcrumb-item"><a href="https://gfreelife.com/{category}">{category.capitalize()}</a></li>
+            <li class="breadcrumb-item"><a href="https://gfreelife.com/{category}/{subcategory}">{subcategory.capitalize()}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{title}</li>
+        </ol>
+    </nav>
+    """
+
+# Function to generate a navigation menu
+def generate_navigation_menu(categories):
+    menu_items = []
+    for category, subcategories in categories.items():
+        menu_items.append(f'<li class="nav-item dropdown">')
+        menu_items.append(f'<a class="nav-link dropdown-toggle" href="/{category}" id="{category}-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{category.capitalize()}</a>')
+        menu_items.append('<div class="dropdown-menu" aria-labelledby="{category}-dropdown">')
+        for subcategory in subcategories:
+            menu_items.append(f'<a class="dropdown-item" href="/{category}/{subcategory}">{subcategory.capitalize()}</a>')
+        menu_items.append('</div>')
+        menu_items.append('</li>')
+    return f"""
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="https://gfreelife.com">GFreeLife</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                {"".join(menu_items)}
+            </ul>
+        </div>
+    </nav>
+    """
+
 # Function to save the formatted HTML content to a file
-def save_formatted_html(post, output_dir):
+def save_formatted_html(post, output_dir, category, subcategory):
+    # Generate breadcrumbs
+    breadcrumbs = generate_breadcrumbs(category, subcategory, post['title'])
+
     # Wrap the generated HTML in a full HTML template
     full_html = f"""
     <!DOCTYPE html>
@@ -66,6 +120,7 @@ def save_formatted_html(post, output_dir):
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{post['title']}</title>
         <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <style>
             body {{
                 margin: 0;
@@ -115,7 +170,9 @@ def save_formatted_html(post, output_dir):
         </style>
     </head>
     <body>
+        {generate_navigation_menu(categories)}
         <div class="container">
+            {breadcrumbs}
             {post['content']}
             <a href="https://gfreelife.com" class="back-link">Back to Home</a>
         </div>
@@ -123,9 +180,14 @@ def save_formatted_html(post, output_dir):
     </html>
     """
 
+    # Create category and subcategory directories
+    category_dir = os.path.join(output_dir, category)
+    subcategory_dir = os.path.join(category_dir, subcategory)
+    os.makedirs(subcategory_dir, exist_ok=True)
+
     # Sanitize the filename and replace spaces with hyphens
     filename = sanitize_filename(f"{post['title']}.html")
-    filepath = os.path.join(output_dir, filename)
+    filepath = os.path.join(subcategory_dir, filename)
     try:
         with open(filepath, "w", encoding="utf-8") as file:
             file.write(full_html)
@@ -148,23 +210,29 @@ def extract_preview(html_content):
 # Function to scan the docs folder for existing posts
 def scan_existing_posts(output_dir):
     existing_posts = []
-    for filename in os.listdir(output_dir):
-        if filename.endswith(".html") and filename != "index.html":
-            filepath = os.path.join(output_dir, filename)
-            try:
-                with open(filepath, "r", encoding="utf-8") as file:
-                    content = file.read()
-                    # Extract the title from the <title> tag
-                    title_match = re.search(r'<title>(.*?)</title>', content)
-                    if title_match:
-                        title = title_match.group(1)
-                        existing_posts.append({
-                            "title": title,
-                            "content": content,
-                            "filename": filename
-                        })
-            except Exception as e:
-                print(f"Error reading file {filename}: {e}")
+    for root, _, files in os.walk(output_dir):
+        for filename in files:
+            if filename.endswith(".html") and filename != "index.html":
+                filepath = os.path.join(root, filename)
+                try:
+                    with open(filepath, "r", encoding="utf-8") as file:
+                        content = file.read()
+                        # Extract the title from the <title> tag
+                        title_match = re.search(r'<title>(.*?)</title>', content)
+                        if title_match:
+                            title = title_match.group(1)
+                            # Extract category and subcategory from the filepath
+                            relative_path = os.path.relpath(filepath, output_dir)
+                            category, subcategory = os.path.split(os.path.dirname(relative_path))
+                            existing_posts.append({
+                                "title": title,
+                                "content": content,
+                                "filename": filename,
+                                "category": category,
+                                "subcategory": subcategory
+                            })
+                except Exception as e:
+                    print(f"Error reading file {filename}: {e}")
     return existing_posts
 
 # Function to generate index.html with the new design
@@ -298,8 +366,8 @@ def generate_index_html(blog_posts, output_dir):
 
     # Add all blog posts to the grid
     for post in blog_posts:
-        # Sanitize the filename
-        filename = post.get("filename", sanitize_filename(f"{post['title']}.html"))
+        # Generate the URL based on category and subcategory
+        url = f"{post['category']}/{post['subcategory']}/{post['filename']}"
         # Extract the first few lines of meaningful text
         preview = extract_preview(post['content'])
         index_content += f"""
@@ -310,7 +378,7 @@ def generate_index_html(blog_posts, output_dir):
                 <div class="body-content">
                     <h3>{post['title']}</h3>
                     <p>{preview}</p>
-                    <a href="{filename}" class="round-btn"><i class="fa fa-long-arrow-right"></i></a>
+                    <a href="{url}" class="round-btn"><i class="fa fa-long-arrow-right"></i></a>
                 </div>
             </div>
         """
@@ -350,7 +418,7 @@ def push_to_github():
 if __name__ == "__main__":
     # List of keywords or topics
     keywords = [
-        "12 inch gluten free wraps"
+        "how to buy a skateboard?"
     ]
 
     # Output directory for blog posts
@@ -361,6 +429,9 @@ if __name__ == "__main__":
     cname_filepath = os.path.join(output_dir, "CNAME")
     with open(cname_filepath, "w") as cname_file:
         cname_file.write("gfreelife.com")
+
+    # Track categories and subcategories
+    categories = defaultdict(set)
 
     # Scan existing posts in the docs folder
     existing_posts = scan_existing_posts(output_dir)
@@ -373,9 +444,16 @@ if __name__ == "__main__":
         if not post_exists:
             post = generate_blog_post(keyword)
             if post:
-                blog_posts.append(post)
-                print(f"Generated post: {post['title']}")
-                print(f"Content preview: {post['content'][:100]}...")  # Debug: Print a preview of the content
+                # Categorize the post
+                category, subcategory = categorize_post(post['title'])
+                categories[category].add(subcategory)
+                blog_posts.append({
+                    **post,
+                    "category": category,
+                    "subcategory": subcategory,
+                    "filename": sanitize_filename(f"{post['title']}.html")
+                })
+                print(f"Generated post: {post['title']} (Category: {category}/{subcategory})")
             else:
                 print(f"Failed to generate post for: {keyword}")
         else:
@@ -386,7 +464,7 @@ if __name__ == "__main__":
 
     # Generate individual HTML files for new posts
     for post in blog_posts:
-        save_formatted_html(post, output_dir)
+        save_formatted_html(post, output_dir, post['category'], post['subcategory'])
 
     # Generate index.html
     generate_index_html(all_posts, output_dir)
