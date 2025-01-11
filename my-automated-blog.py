@@ -788,10 +788,9 @@ def push_to_github():
 
 # Main script
 if __name__ == "__main__":
-    keywords = ["What is the story of Pearl Harbor?",
-"What was the main reason for Pearl Harbor?",
-"Is Pearl Harbor based on a true story?"
-]
+    keywords = [
+        "Which game is No. 1?"
+    ]
     output_dir = "docs"
     os.makedirs(output_dir, exist_ok=True)
     cname_filepath = os.path.join(output_dir, "CNAME")
@@ -808,6 +807,7 @@ if __name__ == "__main__":
     
     blog_posts = []
     for keyword in keywords:
+        # Skip exact match keywords if they already exist
         post_exists = any(post["title"] == keyword for post in existing_posts)
         if not post_exists:
             post = generate_blog_post(keyword)
