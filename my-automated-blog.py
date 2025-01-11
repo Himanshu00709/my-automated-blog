@@ -198,33 +198,8 @@ def scan_existing_posts(output_dir):
                     print(f"Error reading file {filename}: {e}")
     return existing_posts
 
-# Function to generate a navigation menu based on categories and subcategories
-def generate_navigation_menu(categories):
-    menu_items = []
-    for category, subcategories in categories.items():
-        menu_items.append(f'<li class="nav-item dropdown">')
-        menu_items.append(f'<a class="nav-link dropdown-toggle" href="/{category}" id="{category}-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{category.capitalize()}</a>')
-        menu_items.append('<div class="dropdown-menu" aria-labelledby="{category}-dropdown">')
-        for subcategory in subcategories:
-            menu_items.append(f'<a class="dropdown-item" href="/{category}/{subcategory}">{subcategory.capitalize()}</a>')
-        menu_items.append('</div>')
-        menu_items.append('</li>')
-    return f"""
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">GFreeLife</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                {"".join(menu_items)}
-            </ul>
-        </div>
-    </nav>
-    """
-
 # Function to generate index.html with updated card content
-def generate_index_html(blog_posts, output_dir, categories):
+def generate_index_html(blog_posts, output_dir):
     index_content = f"""
     <!DOCTYPE html>
     <html lang="en">
@@ -319,58 +294,6 @@ def generate_index_html(blog_posts, output_dir, categories):
             .round-btn:hover {{
                 box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2), 0 0 0 20px rgba(255, 255, 255, 0.12);
             }}
-            .navbar {{
-                background: #2c3e50;
-                padding: 10px 20px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }}
-            .navbar-brand {{
-                color: #fff;
-                font-size: 24px;
-                font-weight: 700;
-                text-decoration: none;
-            }}
-            .navbar-nav {{
-                display: flex;
-                gap: 20px;
-                list-style: none;
-                margin: 0;
-                padding: 0;
-            }}
-            .nav-item {{
-                position: relative;
-            }}
-            .nav-link {{
-                color: #fff;
-                text-decoration: none;
-                font-size: 16px;
-                font-weight: 500;
-            }}
-            .dropdown-menu {{
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                background: #fff;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                border-radius: 5px;
-                padding: 10px 0;
-                z-index: 1000;
-            }}
-            .dropdown-item {{
-                color: #2c3e50;
-                text-decoration: none;
-                padding: 10px 20px;
-                display: block;
-            }}
-            .dropdown-item:hover {{
-                background: #f8f9fa;
-            }}
-            .nav-item:hover .dropdown-menu {{
-                display: block;
-            }}
             footer {{
                 background: #2c3e50;
                 color: #fff;
@@ -388,7 +311,6 @@ def generate_index_html(blog_posts, output_dir, categories):
         </style>
     </head>
     <body>
-        {generate_navigation_menu(categories)}
         <h1>Welcome to GFreeLife</h1>
         <div class="grid-container">
     """
@@ -410,7 +332,7 @@ def generate_index_html(blog_posts, output_dir, categories):
     index_content += """
         </div>
         <footer>
-            <p>&copy; 2025 GFreeLife. All rights reserved. | <a href="/">Home</a> | <a href="/categories">Categories</a></p>
+            <p>&copy; 2025 GFreeLife. All rights reserved. | <a href="/">Home</a></p>
         </footer>
     </body>
     </html>
@@ -422,411 +344,6 @@ def generate_index_html(blog_posts, output_dir, categories):
         print(f"Generated: {filepath}")
     except Exception as e:
         print(f"Error saving index.html: {e}")
-
-# Function to generate category pages
-def generate_category_pages(categories, output_dir):
-    for category, subcategories in categories.items():
-        # Sanitize category name
-        category = sanitize_filename(category)
-        category_dir = os.path.join(output_dir, category)
-        os.makedirs(category_dir, exist_ok=True)
-        category_content = f"""
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>{category.capitalize()} - GFreeLife</title>
-            <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            <style>
-                body {{
-                    width: 100%;
-                    height: 100vh;
-                    font-family: 'Roboto';
-                    background: #fff;
-                    margin: 0;
-                    padding: 0;
-                }}
-                h1 {{
-                    font-size: 42px;
-                    font-weight: 900;
-                    margin: 50px 5%;
-                    text-transform: capitalize;
-                    position: relative;
-                }}
-                h1:after {{
-                    position: absolute;
-                    content: '';
-                    top: -10px;
-                    left: 0;
-                    width: 80px;
-                    height: 4px;
-                    background: #2c3e50;
-                }}
-                .grid-container {{
-                    width: 90%;
-                    margin: 0 auto;
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 20px;
-                }}
-                .grid-col {{
-                    flex: 1 1 calc(33.3% - 20px);
-                    min-width: 300px;
-                    box-sizing: border-box;
-                    margin-bottom: 20px;
-                }}
-                .grid-col .icon {{
-                    font-size: 48px;
-                    text-align: center;
-                    margin-bottom: 20px;
-                    color: #2c3e50;
-                }}
-                .body-content {{
-                    background: #2c3e50;
-                    padding: 20px;
-                    position: relative;
-                    border: 1px solid #2c3e50;
-                    border-top: none;
-                    z-index: 1;
-                    line-height: 23px;
-                    color: #fff;
-                    border-radius: 5px;
-                }}
-                .body-content h3 {{
-                    margin-bottom: 15px;
-                    font-family: 'Roboto';
-                    font-weight: 900;
-                    font-size: 22px;
-                }}
-                .round-btn {{
-                    position: absolute;
-                    bottom: 25px;
-                    left: 20px;
-                    width: 60px;
-                    height: 60px;
-                    font-size: 22px;
-                    line-height: 60px;
-                    text-align: center;
-                    background: #fff;
-                    color: #2c3e50;
-                    border-radius: 50%;
-                    z-index: 1;
-                    transition: all .2s ease-in-out;
-                    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.0);
-                }}
-                .round-btn:hover {{
-                    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2), 0 0 0 20px rgba(255, 255, 255, 0.12);
-                }}
-                .navbar {{
-                    background: #2c3e50;
-                    padding: 10px 20px;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                }}
-                .navbar-brand {{
-                    color: #fff;
-                    font-size: 24px;
-                    font-weight: 700;
-                    text-decoration: none;
-                }}
-                .navbar-nav {{
-                    display: flex;
-                    gap: 20px;
-                    list-style: none;
-                    margin: 0;
-                    padding: 0;
-                }}
-                .nav-item {{
-                    position: relative;
-                }}
-                .nav-link {{
-                    color: #fff;
-                    text-decoration: none;
-                    font-size: 16px;
-                    font-weight: 500;
-                }}
-                .dropdown-menu {{
-                    display: none;
-                    position: absolute;
-                    top: 100%;
-                    left: 0;
-                    background: #fff;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                    border-radius: 5px;
-                    padding: 10px 0;
-                    z-index: 1000;
-                }}
-                .dropdown-item {{
-                    color: #2c3e50;
-                    text-decoration: none;
-                    padding: 10px 20px;
-                    display: block;
-                }}
-                .dropdown-item:hover {{
-                    background: #f8f9fa;
-                }}
-                .nav-item:hover .dropdown-menu {{
-                    display: block;
-                }}
-                footer {{
-                    background: #2c3e50;
-                    color: #fff;
-                    padding: 20px;
-                    text-align: center;
-                    margin-top: 40px;
-                }}
-                footer a {{
-                    color: #3498db;
-                    text-decoration: none;
-                }}
-                footer a:hover {{
-                    text-decoration: underline;
-                }}
-            </style>
-        </head>
-        <body>
-            <nav class="navbar">
-                <a class="navbar-brand" href="/">GFreeLife</a>
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/categories">Categories</a>
-                    </li>
-                </ul>
-            </nav>
-            <h1>{category.capitalize()}</h1>
-            <div class="grid-container">
-        """
-        for subcategory in subcategories:
-            # Sanitize subcategory name
-            subcategory = sanitize_filename(subcategory)
-            category_content += f"""
-                <div class="grid-col">
-                    <div class="icon">
-                        <i class="fa fa-folder-open-o"></i>
-                    </div>
-                    <div class="body-content">
-                        <h3>{subcategory.capitalize()}</h3>
-                        <a href="/{category}/{subcategory}" class="round-btn"><i class="fa fa-long-arrow-right"></i></a>
-                    </div>
-                </div>
-            """
-        category_content += """
-            </div>
-            <footer>
-                <p>&copy; {datetime.now().year} GFreeLife. All rights reserved. | <a href="/">Home</a> | <a href="/categories">Categories</a></p>
-            </footer>
-        </body>
-        </html>
-        """
-        filepath = os.path.join(category_dir, "index.html")
-        try:
-            with open(filepath, "w", encoding="utf-8") as file:
-                file.write(category_content)
-            print(f"Generated: {filepath}")
-        except Exception as e:
-            print(f"Error saving category page {filepath}: {e}")
-
-# Function to generate subcategory pages
-def generate_subcategory_pages(categories, output_dir, blog_posts):
-    for category, subcategories in categories.items():
-        for subcategory in subcategories:
-            # Sanitize category and subcategory names
-            category = sanitize_filename(category)
-            subcategory = sanitize_filename(subcategory)
-            subcategory_dir = os.path.join(output_dir, category, subcategory)
-            os.makedirs(subcategory_dir, exist_ok=True)
-            subcategory_content = f"""
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>{subcategory.capitalize()} - {category.capitalize()} - GFreeLife</title>
-                <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-                <style>
-                    body {{
-                        width: 100%;
-                        height: 100vh;
-                        font-family: 'Roboto';
-                        background: #fff;
-                        margin: 0;
-                        padding: 0;
-                    }}
-                    h1 {{
-                        font-size: 42px;
-                        font-weight: 900;
-                        margin: 50px 5%;
-                        text-transform: capitalize;
-                        position: relative;
-                    }}
-                    h1:after {{
-                        position: absolute;
-                        content: '';
-                        top: -10px;
-                        left: 0;
-                        width: 80px;
-                        height: 4px;
-                        background: #2c3e50;
-                    }}
-                    .grid-container {{
-                        width: 90%;
-                        margin: 0 auto;
-                        display: flex;
-                        flex-wrap: wrap;
-                        gap: 20px;
-                    }}
-                    .grid-col {{
-                        flex: 1 1 calc(33.3% - 20px);
-                        min-width: 300px;
-                        box-sizing: border-box;
-                        margin-bottom: 20px;
-                    }}
-                    .grid-col .icon {{
-                        font-size: 48px;
-                        text-align: center;
-                        margin-bottom: 20px;
-                        color: #2c3e50;
-                    }}
-                    .body-content {{
-                        background: #2c3e50;
-                        padding: 20px;
-                        position: relative;
-                        border: 1px solid #2c3e50;
-                        border-top: none;
-                        z-index: 1;
-                        line-height: 23px;
-                        color: #fff;
-                        border-radius: 5px;
-                    }}
-                    .body-content h3 {{
-                        margin-bottom: 15px;
-                        font-family: 'Roboto';
-                        font-weight: 900;
-                        font-size: 22px;
-                    }}
-                    .round-btn {{
-                        position: absolute;
-                        bottom: 25px;
-                        left: 20px;
-                        width: 60px;
-                        height: 60px;
-                        font-size: 22px;
-                        line-height: 60px;
-                        text-align: center;
-                        background: #fff;
-                        color: #2c3e50;
-                        border-radius: 50%;
-                        z-index: 1;
-                        transition: all .2s ease-in-out;
-                        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.0);
-                    }}
-                    .round-btn:hover {{
-                        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2), 0 0 0 20px rgba(255, 255, 255, 0.12);
-                    }}
-                    .navbar {{
-                        background: #2c3e50;
-                        padding: 10px 20px;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                    }}
-                    .navbar-brand {{
-                        color: #fff;
-                        font-size: 24px;
-                        font-weight: 700;
-                        text-decoration: none;
-                    }}
-                    .navbar-nav {{
-                        display: flex;
-                        gap: 20px;
-                        list-style: none;
-                        margin: 0;
-                        padding: 0;
-                    }}
-                    .nav-item {{
-                        position: relative;
-                    }}
-                    .nav-link {{
-                        color: #fff;
-                        text-decoration: none;
-                        font-size: 16px;
-                        font-weight: 500;
-                    }}
-                    .dropdown-menu {{
-                        display: none;
-                        position: absolute;
-                        top: 100%;
-                        left: 0;
-                        background: #fff;
-                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                        border-radius: 5px;
-                        padding: 10px 0;
-                        z-index: 1000;
-                    }}
-                    .dropdown-item {{
-                        color: #2c3e50;
-                        text-decoration: none;
-                        padding: 10px 20px;
-                        display: block;
-                    }}
-                    .dropdown-item:hover {{
-                        background: #f8f9fa;
-                    }}
-                    .nav-item:hover .dropdown-menu {{
-                        display: block;
-                    }}
-                </style>
-            </head>
-            <body>
-                <nav class="navbar">
-                    <a class="navbar-brand" href="/">GFreeLife</a>
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/categories">Categories</a>
-                        </li>
-                    </ul>
-                </nav>
-                <h1>{subcategory.capitalize()}</h1>
-                <div class="grid-container">
-            """
-            subcategory_posts = [post for post in blog_posts if post['category'] == category and post['subcategory'] == subcategory]
-            for post in subcategory_posts:
-                url = f"/{post['category']}/{post['subcategory']}/{post['filename']}"
-                preview = extract_preview(post['content'])
-                subcategory_content += f"""
-                    <div class="grid-col">
-                        <div class="icon">
-                            <i class="fa fa-file-text-o"></i>
-                        </div>
-                        <div class="body-content">
-                            <h3>{post['title']}</h3>
-                            <p>{preview}</p>
-                            <a href="{url}" class="round-btn"><i class="fa fa-long-arrow-right"></i></a>
-                        </div>
-                    </div>
-                """
-            subcategory_content += """
-                </div>
-            </body>
-            </html>
-            """
-            filepath = os.path.join(subcategory_dir, "index.html")
-            try:
-                with open(filepath, "w", encoding="utf-8") as file:
-                    file.write(subcategory_content)
-                print(f"Generated: {filepath}")
-            except Exception as e:
-                print(f"Error saving subcategory page {filepath}: {e}")
 
 # Function to generate sitemap.xml
 def generate_sitemap(output_dir, blog_posts):
@@ -876,15 +393,8 @@ def push_to_github():
 
 # Main script
 if __name__ == "__main__":
-    keywords = [
-     "light gluten free beer", "lipton soup mix gluten free", "low sodium gluten free recipes", "lulu's gluten free menu", "mama's gluten free flour", "massimo zero gluten free pasta", "mellow mushroom gluten free crust ingredients", "mississippi pot roast gluten free", "molino flour gluten free", "molino gluten free flour", "mountain farm gluten free bread", "natamycin gluten free", "nautilus glute drive bar weight", "new gluten free", "new gluten free products 2024", "oatmeal chocolate chip bars gluten free", "oggi gluten free pizza crust", "orecchiette gluten free", "organic gluten free sourdough", "pan integral gluten free", "peptones for glutes", "premade gluten free cinnamon rolls", "price gun gluten free", "private label gluten free food manufacturers", "quesos sin lactosa y sin gluten", "raglan road gluten free menu", "red bowl gluten free menu", "ristoranti gluten free vicino a me", "sakura gluta brightening underarm cream", "san angel inn gluten free menu", "scotland gluten free", "serranos gluten free menu", "shiro gluta", "smallcakes gluten free", "soft glute bench", "soju gluten free", "soup mix gluten free", "spaghetti warehouse gluten free", "spicy gluten free ramen", "spinach gluten free pasta", "spinach noodles gluten free", "store bought gluten free cinnamon rolls", "sugar free gluten free wine", "surfside vodka gluten free", "sweet fa gluten free", "ta'amti gluten free", "thanksgiving recipes gluten free dairy free", "the fine cheese company gluten free crackers", "the hub gluten free menu", "trader joe's gluten free beer", "trader joe's gluten free pumpkin pancake mix recipes", "tsingtao beer gluten free", "vegan chocolate gluten free", "vegan gluten free gifts", "venezia gluten free pasta", "where can i buy gluten free cinnamon rolls", "where can i buy gluten free soda bread", "where to buy gluten free cannoli shells", "where to buy gluten free challah", "wow cookies gluten free", "yoyo biscuits gluten free", "abs and glute machine", "alcohol free gluten free beer", "almond bark gluten free", "angel hair gluten free pasta", "animal kingdom gluten free", "are almond roca gluten free", "are applebee's riblets gluten free", "are candy cigarettes gluten free", "are carnitas gluten free", "are charms sweet pops gluten free", "are coffee creamers gluten free", "are cookout fries gluten free", "are gumballs gluten free", "are kirkland semi sweet chocolate chips gluten free", "are lip smackers gluten free", "are malibu splash gluten free", "are oatmeal cream pies gluten free", "are potato donuts gluten free", "are snow cones gluten free", "are starburst swirlers gluten free", "are sunkist fruit gems gluten free", "are turtles chocolates gluten free", "asafetida gluten free", "asafoetida powder gluten free", "avoine gluten", "be our guest gluten free", "bear creek soup gluten free", "belvedere vodka gluten free", "best gluten free subscription box", "black eyed pea gluten free", "blonde gluten free beer", "borghetti espresso liqueur gluten free", "bouncer high gluten flour", "buca gluten free", "buckeyes gluten free", "bulk gluten free", "bulk gluten free oats", "bulk gluten free soy sauce", "buy gluten free biscuits", "buy gluten free sugar free birthday cake", "cajun seasoning gluten free", "candid white milf glutes", "canned gluten free cinnamon rolls", "caramel shortbread gluten free", "charms sweet pops gluten free", "chicken francese gluten free", "chili crisp gluten free", "chipotle sauce gluten free", "christmas food gifts for gluten free", "churrascos gluten free menu", "communion bread gluten free", "cookie crisp gluten free", "corn flake crumbs gluten free", "cottage cheese gluten free bread", "dairy free gluten free pancake mix", "demi glace gluten free", "does horchata have gluten", "does pho noodles have gluten", "does trader joe's have gluten free pizza dough", "doves farm free gluten free flour", "dream oat milk gluten free", "dumle gluten free", "el sillao tiene gluten", "emsculpt glutes before and after", "estrella damm beer gluten free", "estrella damm daura gluten free", "estrella galicia gluten free", "fettuccine pasta gluten free", "filipino food gluten free", "freee gluten free bread flour", "frothy monkey gluten free", "frozen gluten free cookie dough", "galletas maria gluten free", "glicks high gluten flour", "gluta c", "gluta c kojic plus", "gluta c with kojic plus", "gluta drip near me", "gluta milky cream", "gluta shots near me", "gluta-c soap intense whitening", "glute and ab machine", "glute leg machine", "gluten and dairy free food delivery", "gluten and dairy free party food", "gluten and dairy free potluck recipes", "gluten and dairy free recipes for thanksgiving", "gluten and dairy free super bowl recipes", "gluten food test strips", "gluten free almond extract", "gluten free alphabet pasta", "gluten free apple kugel", "gluten free assorted chocolates", "gluten free b and b", "gluten free bacon recipes", "gluten free bakery charlestown", "gluten free bakery gig harbor", "gluten free banana bread with sour cream", "gluten free beer and cider", "gluten free beer greens", "gluten free beer sampler", "gluten free big island", "gluten free blini recipe", "gluten free blonde beer", "gluten free blt", "gluten free bread box", "gluten free buckeyes", "gluten free business for sale", "gluten free butterfly shrimp", "gluten free butternut squash ravioli", "gluten free buñuelos recipe", "gluten free cacio e pepe", "gluten free cake shipped", "gluten free challah los angeles", "gluten free cheese straw recipe", "gluten free chicken marsala", "gluten free chili crisp", "gluten free chinese almond cookies", "gluten free chocolate box", "gluten free chocolate covered strawberries", "gluten free chocolate croissant", "gluten free chocolate gift box", "gluten free chocolate gifts", "gluten free chocolate mousse pie", "gluten free chocolate peppermint cake", "gluten free christmas cookies to order", "gluten free christmas ornaments", "gluten free christmas tree cakes", "gluten free cinnamon raisin muffins", "gluten free cinnamon roll pancakes", "gluten free cinnamon toast crunch", "gluten free cocktail sausages", "gluten free colonoscopy prep", "gluten free communion bread", "gluten free corn meal mix", "gluten free cranberry oatmeal cookies", "gluten free crock pot lasagna", "gluten free cupcakes grand rapids mi", "gluten free custard pie", "gluten free dairy free subscription box", "gluten free dairy free sugar free cookbook", "gluten free dairy free super bowl snacks", "gluten free dairy free thanksgiving", "gluten free deep fried oreos", "gluten free donuts delivery", "gluten free downtown disney", "gluten free dutch oven peach cobbler", "gluten free eclair cake", "gluten free eclair recipe", "gluten free elephant ears", "gluten free estrella galicia", "gluten free fall baking", "gluten free farmers market englewood", "gluten free festival", "gluten free finger sandwiches", "gluten free fish patties", "gluten free flour 25 lbs", "gluten free food in china", "gluten free food samples", "gluten free food tour london", "gluten free food tour paris", "gluten free fortune cookie recipe", "gluten free fried ravioli", "gluten free gouda mac and cheese", "gluten free gourmet chocolate", "gluten free grasshopper pie", "gluten free greens", "gluten free hefeweizen", "gluten free hot cocoa bombs", "gluten free hot water pastry", "gluten free hotel new york", "gluten free hula hoops", "gluten free in china", "gluten free in korea", "gluten free in scotland", "gluten free indian snacks to buy", "gluten free individually wrapped snacks", "gluten free instant pot", "gluten free international snack box", "gluten free japanese beer", "gluten free king cake baton rouge", "gluten free king cake shipping", "gluten free lasagna crock pot", "gluten free lemon blueberry scones", "gluten free licorice canada", "gluten free liege waffles", "gluten free little debbie christmas tree cakes", "gluten free low sodium bread", "gluten free m&m cookies", "gluten free mango cake", "gluten free maple bars", "gluten free meat sticks", "gluten free memorial day recipes", "gluten free mexico city", "gluten free mississippi pot roast", "gluten free mithai", "gluten free mojito", "gluten free mooncake", "gluten free mooncake recipe", "gluten free mother's day brunch", "gluten free mother's day gift", "gluten free mother's day gifts", "gluten free movie snacks", "gluten free muffaletta", "gluten free oat rolls", "gluten free oats bulk", "gluten free oreo cookie crust", "gluten free oreo cupcakes", "gluten free oreo pie crust", "gluten free pappardelle pasta", "gluten free pasta rings", "gluten free pecan pie brownies", "gluten free pesto pizza", "gluten free pizza bagels", "gluten free platters", "gluten free pork rub", "gluten free puffed rice", "gluten free pumpernickel bagels", "gluten free pumpernickel recipe", "gluten free rainbow cake", "gluten free salisbury steak recipe", "gluten free salmon marinade", "gluten free sand tarts", "gluten free sandwich platters", "gluten free slow cooker lasagna", "gluten free souffle cheese", "gluten free sour beer", "gluten free sourdough bagels", "gluten free sourdough bread online", "gluten free sourdough waffles", "gluten free soy free bread", "gluten free soy free crackers", "gluten free spaghetti carbonara", "gluten free spinach pasta", "gluten free spring rolls frozen", "gluten free square pretzels", "gluten free strawberry ice cream", "gluten free strawberry rhubarb muffins", "gluten free stromboli", "gluten free sugar free cake mix", "gluten free sweet and sour chicken", "gluten free tarte tatin", "gluten free tequila brands", "gluten free teriyaki chicken recipe", "gluten free thanksgiving meals to order", "gluten free thanksgiving order", "gluten free tinted moisturizer", "gluten free tortellini soup", "gluten free tours of italy", "gluten free tres leches near me", "gluten free twice baked potatoes", "gluten free twisted tea", "gluten free ube cookies", "gluten free vegetarian products", "gluten free wasabi peas", "gluten free water crackers", "gluten free wedding catering", "gluten free welsh cakes", "gluten free whipped shortbread", "gluten free wholesalers", "gluten pork", "gluten-free bread pudding with bourbon sauce", "gluten-free school lunch ideas for picky eaters", "gluten-free side dishes for bbq", "glutes workout bench", "gooey butter cake gluten free", "harina p.a.n. gluten free", "harina pan gluten free", "heartland gluten free pasta", "heritage high gluten flour", "immaculate gluten free cookies", "is asahi beer gluten free", "is bear creek soup gluten free", "is blackened seasoning gluten free", "is chicken francese gluten free", "is crown royal whiskey lemonade gluten free", "is good and gather chicken broth gluten free", "is green goddess dressing gluten free", "is idli gluten free", "is kettle corn gluten free", "is kinky gluten free", "is kirin beer gluten free", "is lipton beefy onion soup mix gluten free", "is malai kofta gluten free", "is mango sticky rice gluten free", "is marsala sauce gluten free", "is ratatouille gluten free", "is salisbury steak gluten free", "is screwball whisky gluten free", "is smirnoff vanilla vodka gluten free", "is swedish candy gluten free", "is taco dip gluten free", "is tattoo ink gluten free", "is tecate gluten free", "is the kraken rum gluten free", "is tonic water gluten free", "is tony's creole seasoning gluten free", "is tony's gluten free", "italian rainbow cookies gluten free", "jl beers gluten free", "jordan almonds gluten free", "kim's gluten free flour blend", "knish gluten free", "kosher gluten free", "kyrol high gluten flour", "las almendras contienen gluten", "luxxe white gluta", "malt loaf gluten free", "metabolic maintenance l-methylfolate 10mg - gluten-free", "michelob ultra gold gluten free", "michelob ultra pure gold gluten free", "namaste gluten free flour recipes", "new amsterdam gluten free", "new gluten free products", "outback.gluten free menu", "outer banks gluten free", "pappardelle gluten free pasta", "pcos gluten and dairy free", "peanut brittle gluten free", "peanut butter balls gluten free", "popeyes blackened chicken gluten free", "pozole gluten free", "pre made gluten free pizza dough", "premade gluten free cookie dough", "prodynorphin in gluten", "pumpkin beer gluten free", "reverse glute ham machine", "rochester ny gluten free bakery", "salisbury steak recipe gluten free", "sarasota gluten free bakery", "schär gluten free online shop", "scrapple gluten free", "shawarma gluten free", "sheetz gluten free menu", "shumai gluten free", "sope gluten free", "spanish beer gluten free", "spanish gluten free beer", "sticky fingers gluten free scone mix"
-
-
-
-
-
-
-
+    keywords = [ 
+       "How to use a switch?"
     ]
     output_dir = "docs"
     os.makedirs(output_dir, exist_ok=True)
@@ -944,10 +454,8 @@ if __name__ == "__main__":
     for thread in save_threads:
         thread.join()
     
-    # Generate index.html, category pages, and subcategory pages
-    generate_index_html(all_posts, output_dir, categories)
-    generate_category_pages(categories, output_dir)
-    generate_subcategory_pages(categories, output_dir, all_posts)
+    # Generate index.html
+    generate_index_html(all_posts, output_dir)
     
     # Generate sitemap.xml and robots.txt
     generate_sitemap(output_dir, all_posts)
