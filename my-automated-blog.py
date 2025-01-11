@@ -64,38 +64,38 @@ def save_formatted_html(post, output_dir):
             body {{
                 margin: 0;
                 padding: 0;
-                background: #2c3e50; /* Dark blue background */
+                background: hsl(47, 88%, 63%);
                 font-family: "Figtree", sans-serif;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 min-height: 100vh;
-                color: white; /* White text */
             }}
             .container {{
-                background: #34495e; /* Slightly lighter blue for the container */
+                background: hsl(0, 0%, 100%);
                 max-width: 800px;
                 margin: 20px;
                 padding: 20px;
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                border: solid 1px hsl(0, 0%, 7%);
+                border-radius: 20px;
+                box-shadow: 12px 12px 10px -6px rgba(0,0,0,1);
             }}
             h1 {{
-                color: white;
+                color: #2c3e50;
                 text-align: center;
                 margin-bottom: 20px;
             }}
             h2 {{
-                color: #1abc9c; /* Teal for subheadings */
+                color: #34495e;
                 margin-top: 30px;
                 margin-bottom: 15px;
             }}
             p {{
-                color: #ecf0f1; /* Light gray for paragraphs */
+                color: #666;
                 margin-bottom: 20px;
             }}
             a {{
-                color: #3498db; /* Blue for links */
+                color: #3498db;
                 text-decoration: none;
             }}
             a:hover {{
@@ -105,7 +105,6 @@ def save_formatted_html(post, output_dir):
                 display: inline-block;
                 margin-top: 20px;
                 font-size: 16px;
-                color: #3498db; /* Blue for back link */
             }}
         </style>
     </head>
@@ -178,10 +177,7 @@ def generate_index_html(blog_posts, output_dir):
                 width: 100%;
                 height: 100vh;
                 font-family: 'Roboto';
-                background: #2c3e50; /* Dark blue background */
-                margin: 0;
-                padding: 0;
-                color: white;
+                background: #fff;
             }
 
             h1 {
@@ -190,7 +186,6 @@ def generate_index_html(blog_posts, output_dir):
                 margin: 50px 5%;
                 text-transform: capitalize;
                 position: relative;
-                color: white;
             }
 
             h1:after {
@@ -200,13 +195,12 @@ def generate_index_html(blog_posts, output_dir):
                 left: 0;
                 width: 80px;
                 height: 4px;
-                background: #1abc9c; /* Teal for underline */
+                background: #2c3e50;
             }
 
             .grid-container {
                 width: 90%;
                 margin: 0 auto;
-                padding-bottom: 40px; /* Space between rows */
             }
 
             .grid-col {
@@ -214,7 +208,7 @@ def generate_index_html(blog_posts, output_dir):
                 min-width: 300px;
                 box-sizing: border-box;
                 padding-right: 20px;
-                margin-bottom: 40px; /* Space between cards */
+                margin-bottom: 20px;
                 float: left;
             }
 
@@ -222,16 +216,35 @@ def generate_index_html(blog_posts, output_dir):
                 font-size: 48px;
                 text-align: center;
                 margin-bottom: 20px;
-                color: #1abc9c; /* Teal for icon */
+                color: #2c3e50;
             }
 
             .body-content {
-                background: #34495e; /* Slightly lighter blue for the container */
-                padding: 20px;
+                background: #2c3e50;
+                padding: 0 30px 120px 40px;
                 position: relative;
-                border-radius: 10px;
-                color: white;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                border: 1px solid #2c3e50;
+                border-top: none;
+                z-index: 1;
+                line-height: 23px;
+                color: #fff;
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
+            }
+
+            .body-content:before {
+                content: '';
+                position: absolute;
+                top: -30px;
+                left: -1px;
+                width: 100%;
+                height: 50px;
+                background: #2c3e50;
+                border-left: 1px solid #2c3e50;
+                border-right: 1px solid #2c3e50;
+                transform: skewY(5deg);
+                z-index: -1;
+                box-shadow: 0 -4px 5px rgba(0,0,0,0.4);
             }
 
             .body-content h3 {
@@ -239,31 +252,35 @@ def generate_index_html(blog_posts, output_dir):
                 font-family: 'Roboto';
                 font-weight: 900;
                 font-size: 22px;
-                color: white;
-            }
-
-            .body-content p {
-                color: #ecf0f1; /* Light gray for preview text */
             }
 
             .round-btn {
                 position: absolute;
                 bottom: 25px;
-                left: 20px;
+                left: 40px!important;
                 width: 60px;
                 height: 60px;
                 font-size: 22px;
                 line-height: 60px;
                 text-align: center;
-                background: #1abc9c; /* Teal for button */
-                color: white;
+                background: #fff;
+                color: #2c3e50;
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
                 border-radius: 50%;
                 z-index: 1;
-                transition: all 0.2s ease-in-out;
+                -webkit-transition: all .2s ease-in-out;
+                -o-transition: all .2s ease-in-out;
+                -moz-transition: all .2s ease-in-out;
+                transition: all .2s ease-in-out;
+                -webkit-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.0);
+                -moz-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.0);
                 box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.0);
             }
 
             .round-btn:hover {
+                -webkit-box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2), 0 0 0 20px rgba(255, 255, 255, 0.12);
+                -moz-box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2), 0 0 0 20px rgba(255, 255, 255, 0.12);
                 box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2), 0 0 0 20px rgba(255, 255, 255, 0.12);
             }
         </style>
@@ -327,7 +344,7 @@ def push_to_github():
 if __name__ == "__main__":
     # List of keywords or topics
     keywords = [
-        "who is elon musk? "
+        "what is google?"
     ]
 
     # Output directory for blog posts
