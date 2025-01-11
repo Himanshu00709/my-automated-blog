@@ -857,7 +857,7 @@ def push_to_github():
 # Main script
 if __name__ == "__main__":
     keywords = [
-        "How to make a game?"
+        "how to play a fighting game?"
     ]
     output_dir = "docs"
     os.makedirs(output_dir, exist_ok=True)
