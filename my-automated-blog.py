@@ -212,12 +212,11 @@ def generate_index_html(blog_posts, output_dir):
                 float: left;
             }
 
-            .grid-col img {
-                width: 100%;
-                height: auto;
-                max-height: 250px;
-                border-top-left-radius: 5px;
-                border-top-right-radius: 5px;
+            .grid-col .icon {
+                font-size: 48px;
+                text-align: center;
+                margin-bottom: 20px;
+                color: #2c3e50;
             }
 
             .body-content {
@@ -299,7 +298,9 @@ def generate_index_html(blog_posts, output_dir):
         preview = extract_preview(post['content'])
         index_content += f"""
             <div class="grid-col">
-                <img src="https://images.pexels.com/photos/442542/pexels-photo-442542.jpeg?w=940&h=650&auto=compress&cs=tinysrgb" alt="">
+                <div class="icon">
+                    <i class="fa fa-file-text-o"></i>
+                </div>
                 <div class="body-content">
                     <h3>{post['title']}</h3>
                     <p>{preview}</p>
@@ -349,6 +350,11 @@ if __name__ == "__main__":
     # Output directory for blog posts
     output_dir = "docs"
     os.makedirs(output_dir, exist_ok=True)
+
+    # Add CNAME file for custom domain
+    cname_filepath = os.path.join(output_dir, "CNAME")
+    with open(cname_filepath, "w") as cname_file:
+        cname_file.write("gfreelife.com")
 
     # Scan existing posts in the docs folder
     existing_posts = scan_existing_posts(output_dir)
