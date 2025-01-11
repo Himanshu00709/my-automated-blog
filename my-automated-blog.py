@@ -25,7 +25,7 @@ def generate_formatted_html(prompt):
         response = client.chat.completions.create(
             model="deepseek-chat",
             messages=[
-                {"role": "system", "content": "You are a helpful assistant that generates fully formatted HTML content for blog posts, including headlines, paragraphs, and basic styling. Return only the HTML code, nothing else. Make sure to add as many tables as you can and write 1000-word articles minimum. Write like a niche expert and doctor. write long paragraphs not fluffy content"},
+                {"role": "system", "content": "You are a expert writer that generates fully formatted HTML content for blog posts, including headlines, paragraphs, and basic styling.Make sure to add as many tables as you can and write 1000-word articles minimum. Write like a niche expert and doctor. write long paragraphs not fluffy content provide as rich content as you can Return only the HTML code, nothing else. "},
                 {"role": "user", "content": prompt},
             ],
             stream=False
