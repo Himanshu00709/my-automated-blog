@@ -24,7 +24,7 @@ def generate_formatted_html(prompt):
         response = client.chat.completions.create(
             model="deepseek-chat",
             messages=[
-                {"role": "system", "content": "You are a helpful assistant that generates fully formatted HTML content for blog posts, including headlines, paragraphs, and basic styling. Return only the HTML code, nothing else. Make sure to add as many tables as you can and write 1000-word articles minimum."},
+                {"role": "system", "content": "You are a helpful assistant that generates fully formatted HTML content for blog posts, including headlines, paragraphs, and basic styling. Return only the HTML code, nothing else. Make sure to add as many tables as you can and write 1000-word articles minimum.strictly and write like niche expert or doctor"},
                 {"role": "user", "content": prompt},
             ],
             stream=False
@@ -224,7 +224,7 @@ def generate_index_html(blog_posts, output_dir, categories):
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>My Automated Blog</title>
+        <title>Gluten Free Life</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <style>
@@ -389,7 +389,7 @@ def generate_index_html(blog_posts, output_dir, categories):
                 </div>
                 <div class="body-content">
                     <h3>{post['title']}</h3>
-                    <p>{preview}</p>
+                    
                     <a href="{url}" class="round-btn"><i class="fa fa-long-arrow-right"></i></a>
                 </div>
             </div>
@@ -397,7 +397,7 @@ def generate_index_html(blog_posts, output_dir, categories):
     index_content += """
         </div>
         <footer>
-            <p>&copy; {datetime.now().year} GFreeLife. All rights reserved. | <a href="/">Home</a> | <a href="/categories">Categories</a></p>
+            <p>&copy; 2025 GFreeLife. All rights reserved. | <a href="/">Home</a> | <a href="/categories">Categories</a></p>
         </footer>
     </body>
     </html>
@@ -857,7 +857,9 @@ def push_to_github():
 # Main script
 if __name__ == "__main__":
     keywords = [
-        "8 week glute transformation​"
+        "acini de pepe gluten free",
+"amaro nonino gluten free",
+"ancient grain bread gluten free"
     ]
     output_dir = "docs"
     os.makedirs(output_dir, exist_ok=True)
