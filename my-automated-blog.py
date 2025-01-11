@@ -88,6 +88,7 @@ def save_formatted_html(post, output_dir, category, subcategory):
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{post['title']}</title>
         <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         <style>
             body {{
                 margin: 0;
@@ -95,8 +96,8 @@ def save_formatted_html(post, output_dir, category, subcategory):
                 background: hsl(47, 88%, 63%);
                 font-family: "Figtree", sans-serif;
                 display: flex;
+                flex-direction: column;
                 align-items: center;
-                justify-content: center;
                 min-height: 100vh;
             }}
             .container {{
@@ -107,6 +108,7 @@ def save_formatted_html(post, output_dir, category, subcategory):
                 border: solid 1px hsl(0, 0%, 7%);
                 border-radius: 20px;
                 box-shadow: 12px 12px 10px -6px rgba(0,0,0,1);
+                flex: 1;
             }}
             h1 {{
                 color: #2c3e50;
@@ -129,10 +131,28 @@ def save_formatted_html(post, output_dir, category, subcategory):
             a:hover {{
                 text-decoration: underline;
             }}
-            .back-link {{
-                display: inline-block;
-                margin-top: 20px;
-                font-size: 16px;
+            footer {{
+                background: #2c3e50;
+                color: #fff;
+                padding: 20px;
+                text-align: center;
+                width: 100%;
+                margin-top: auto;
+            }}
+            footer a {{
+                color: #fff;
+                margin: 0 10px;
+                text-decoration: none;
+            }}
+            footer a:hover {{
+                color: #3498db;
+            }}
+            .social-icons {{
+                margin-top: 10px;
+            }}
+            .social-icons a {{
+                font-size: 24px;
+                margin: 0 10px;
             }}
         </style>
     </head>
@@ -141,6 +161,14 @@ def save_formatted_html(post, output_dir, category, subcategory):
             {post['content']}
             <a href="https://gfreelife.com" class="back-link">Back to Home</a>
         </div>
+        <footer>
+            <p>&copy; 2023 GFreeLife. All rights reserved.</p>
+            <div class="social-icons">
+                <a href="https://facebook.com/gfreelife" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://twitter.com/gfreelife" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com/gfreelife" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </footer>
     </body>
     </html>
     """
@@ -225,7 +253,7 @@ def generate_index_html(blog_posts, output_dir, categories):
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>My Automated Blog</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         <style>
             body {{
                 width: 100%;
@@ -234,6 +262,8 @@ def generate_index_html(blog_posts, output_dir, categories):
                 background: #fff;
                 margin: 0;
                 padding: 0;
+                display: flex;
+                flex-direction: column;
             }}
             h1 {{
                 font-size: 42px;
@@ -257,6 +287,7 @@ def generate_index_html(blog_posts, output_dir, categories):
                 display: flex;
                 flex-wrap: wrap;
                 gap: 20px;
+                flex: 1;
             }}
             .grid-col {{
                 flex: 1 1 calc(33.3% - 20px);
@@ -287,76 +318,28 @@ def generate_index_html(blog_posts, output_dir, categories):
                 font-weight: 900;
                 font-size: 22px;
             }}
-            .round-btn {{
-                position: absolute;
-                bottom: 25px;
-                left: 20px;
-                width: 60px;
-                height: 60px;
-                font-size: 22px;
-                line-height: 60px;
-                text-align: center;
-                background: #fff;
-                color: #2c3e50;
-                border-radius: 50%;
-                z-index: 1;
-                transition: all .2s ease-in-out;
-                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.0);
-            }}
-            .round-btn:hover {{
-                box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2), 0 0 0 20px rgba(255, 255, 255, 0.12);
-            }}
-            .navbar {{
+            footer {{
                 background: #2c3e50;
-                padding: 10px 20px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }}
-            .navbar-brand {{
                 color: #fff;
+                padding: 20px;
+                text-align: center;
+                width: 100%;
+                margin-top: auto;
+            }}
+            footer a {{
+                color: #fff;
+                margin: 0 10px;
+                text-decoration: none;
+            }}
+            footer a:hover {{
+                color: #3498db;
+            }}
+            .social-icons {{
+                margin-top: 10px;
+            }}
+            .social-icons a {{
                 font-size: 24px;
-                font-weight: 700;
-                text-decoration: none;
-            }}
-            .navbar-nav {{
-                display: flex;
-                gap: 20px;
-                list-style: none;
-                margin: 0;
-                padding: 0;
-            }}
-            .nav-item {{
-                position: relative;
-            }}
-            .nav-link {{
-                color: #fff;
-                text-decoration: none;
-                font-size: 16px;
-                font-weight: 500;
-            }}
-            .dropdown-menu {{
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                background: #fff;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                border-radius: 5px;
-                padding: 10px 0;
-                z-index: 1000;
-            }}
-            .dropdown-item {{
-                color: #2c3e50;
-                text-decoration: none;
-                padding: 10px 20px;
-                display: block;
-            }}
-            .dropdown-item:hover {{
-                background: #f8f9fa;
-            }}
-            .nav-item:hover .dropdown-menu {{
-                display: block;
+                margin: 0 10px;
             }}
         </style>
     </head>
@@ -376,12 +359,20 @@ def generate_index_html(blog_posts, output_dir, categories):
                 <div class="body-content">
                     <h3>{post['title']}</h3>
                     <p>{preview}</p>
-                    <a href="{url}" class="round-btn"><i class="fa fa-long-arrow-right"></i></a>
+                    <a href="{url}" class="read-more">Read More</a>
                 </div>
             </div>
         """
     index_content += """
         </div>
+        <footer>
+            <p>&copy; 2023 GFreeLife. All rights reserved.</p>
+            <div class="social-icons">
+                <a href="https://facebook.com/gfreelife" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://twitter.com/gfreelife" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com/gfreelife" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </footer>
     </body>
     </html>
     """
@@ -406,7 +397,7 @@ def generate_category_pages(categories, output_dir):
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>{category.capitalize()} - GFreeLife</title>
             <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
             <style>
                 body {{
                     width: 100%;
@@ -415,6 +406,8 @@ def generate_category_pages(categories, output_dir):
                     background: #fff;
                     margin: 0;
                     padding: 0;
+                    display: flex;
+                    flex-direction: column;
                 }}
                 h1 {{
                     font-size: 42px;
@@ -438,6 +431,7 @@ def generate_category_pages(categories, output_dir):
                     display: flex;
                     flex-wrap: wrap;
                     gap: 20px;
+                    flex: 1;
                 }}
                 .grid-col {{
                     flex: 1 1 calc(33.3% - 20px);
@@ -468,76 +462,28 @@ def generate_category_pages(categories, output_dir):
                     font-weight: 900;
                     font-size: 22px;
                 }}
-                .round-btn {{
-                    position: absolute;
-                    bottom: 25px;
-                    left: 20px;
-                    width: 60px;
-                    height: 60px;
-                    font-size: 22px;
-                    line-height: 60px;
-                    text-align: center;
-                    background: #fff;
-                    color: #2c3e50;
-                    border-radius: 50%;
-                    z-index: 1;
-                    transition: all .2s ease-in-out;
-                    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.0);
-                }}
-                .round-btn:hover {{
-                    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2), 0 0 0 20px rgba(255, 255, 255, 0.12);
-                }}
-                .navbar {{
+                footer {{
                     background: #2c3e50;
-                    padding: 10px 20px;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                }}
-                .navbar-brand {{
                     color: #fff;
+                    padding: 20px;
+                    text-align: center;
+                    width: 100%;
+                    margin-top: auto;
+                }}
+                footer a {{
+                    color: #fff;
+                    margin: 0 10px;
+                    text-decoration: none;
+                }}
+                footer a:hover {{
+                    color: #3498db;
+                }}
+                .social-icons {{
+                    margin-top: 10px;
+                }}
+                .social-icons a {{
                     font-size: 24px;
-                    font-weight: 700;
-                    text-decoration: none;
-                }}
-                .navbar-nav {{
-                    display: flex;
-                    gap: 20px;
-                    list-style: none;
-                    margin: 0;
-                    padding: 0;
-                }}
-                .nav-item {{
-                    position: relative;
-                }}
-                .nav-link {{
-                    color: #fff;
-                    text-decoration: none;
-                    font-size: 16px;
-                    font-weight: 500;
-                }}
-                .dropdown-menu {{
-                    display: none;
-                    position: absolute;
-                    top: 100%;
-                    left: 0;
-                    background: #fff;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                    border-radius: 5px;
-                    padding: 10px 0;
-                    z-index: 1000;
-                }}
-                .dropdown-item {{
-                    color: #2c3e50;
-                    text-decoration: none;
-                    padding: 10px 20px;
-                    display: block;
-                }}
-                .dropdown-item:hover {{
-                    background: #f8f9fa;
-                }}
-                .nav-item:hover .dropdown-menu {{
-                    display: block;
+                    margin: 0 10px;
                 }}
             </style>
         </head>
@@ -564,12 +510,20 @@ def generate_category_pages(categories, output_dir):
                     </div>
                     <div class="body-content">
                         <h3>{subcategory.capitalize()}</h3>
-                        <a href="/{category}/{subcategory}" class="round-btn"><i class="fa fa-long-arrow-right"></i></a>
+                        <a href="/{category}/{subcategory}" class="read-more">Explore</a>
                     </div>
                 </div>
             """
         category_content += """
             </div>
+            <footer>
+                <p>&copy; 2023 GFreeLife. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="https://facebook.com/gfreelife" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com/gfreelife" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com/gfreelife" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </footer>
         </body>
         </html>
         """
@@ -595,7 +549,7 @@ def generate_subcategory_pages(categories, output_dir, blog_posts):
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>{subcategory.capitalize()} - {category.capitalize()} - GFreeLife</title>
                 <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
                 <style>
                     body {{
                         width: 100%;
@@ -604,6 +558,8 @@ def generate_subcategory_pages(categories, output_dir, blog_posts):
                         background: #fff;
                         margin: 0;
                         padding: 0;
+                        display: flex;
+                        flex-direction: column;
                     }}
                     h1 {{
                         font-size: 42px;
@@ -627,6 +583,7 @@ def generate_subcategory_pages(categories, output_dir, blog_posts):
                         display: flex;
                         flex-wrap: wrap;
                         gap: 20px;
+                        flex: 1;
                     }}
                     .grid-col {{
                         flex: 1 1 calc(33.3% - 20px);
@@ -657,76 +614,28 @@ def generate_subcategory_pages(categories, output_dir, blog_posts):
                         font-weight: 900;
                         font-size: 22px;
                     }}
-                    .round-btn {{
-                        position: absolute;
-                        bottom: 25px;
-                        left: 20px;
-                        width: 60px;
-                        height: 60px;
-                        font-size: 22px;
-                        line-height: 60px;
-                        text-align: center;
-                        background: #fff;
-                        color: #2c3e50;
-                        border-radius: 50%;
-                        z-index: 1;
-                        transition: all .2s ease-in-out;
-                        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.0);
-                    }}
-                    .round-btn:hover {{
-                        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2), 0 0 0 20px rgba(255, 255, 255, 0.12);
-                    }}
-                    .navbar {{
+                    footer {{
                         background: #2c3e50;
-                        padding: 10px 20px;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                    }}
-                    .navbar-brand {{
                         color: #fff;
+                        padding: 20px;
+                        text-align: center;
+                        width: 100%;
+                        margin-top: auto;
+                    }}
+                    footer a {{
+                        color: #fff;
+                        margin: 0 10px;
+                        text-decoration: none;
+                    }}
+                    footer a:hover {{
+                        color: #3498db;
+                    }}
+                    .social-icons {{
+                        margin-top: 10px;
+                    }}
+                    .social-icons a {{
                         font-size: 24px;
-                        font-weight: 700;
-                        text-decoration: none;
-                    }}
-                    .navbar-nav {{
-                        display: flex;
-                        gap: 20px;
-                        list-style: none;
-                        margin: 0;
-                        padding: 0;
-                    }}
-                    .nav-item {{
-                        position: relative;
-                    }}
-                    .nav-link {{
-                        color: #fff;
-                        text-decoration: none;
-                        font-size: 16px;
-                        font-weight: 500;
-                    }}
-                    .dropdown-menu {{
-                        display: none;
-                        position: absolute;
-                        top: 100%;
-                        left: 0;
-                        background: #fff;
-                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                        border-radius: 5px;
-                        padding: 10px 0;
-                        z-index: 1000;
-                    }}
-                    .dropdown-item {{
-                        color: #2c3e50;
-                        text-decoration: none;
-                        padding: 10px 20px;
-                        display: block;
-                    }}
-                    .dropdown-item:hover {{
-                        background: #f8f9fa;
-                    }}
-                    .nav-item:hover .dropdown-menu {{
-                        display: block;
+                        margin: 0 10px;
                     }}
                 </style>
             </head>
@@ -757,12 +666,20 @@ def generate_subcategory_pages(categories, output_dir, blog_posts):
                         <div class="body-content">
                             <h3>{post['title']}</h3>
                             <p>{preview}</p>
-                            <a href="{url}" class="round-btn"><i class="fa fa-long-arrow-right"></i></a>
+                            <a href="{url}" class="read-more">Read More</a>
                         </div>
                     </div>
                 """
             subcategory_content += """
                 </div>
+                <footer>
+                    <p>&copy; 2023 GFreeLife. All rights reserved.</p>
+                    <div class="social-icons">
+                        <a href="https://facebook.com/gfreelife" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://twitter.com/gfreelife" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com/gfreelife" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </footer>
             </body>
             </html>
             """
@@ -788,7 +705,7 @@ def push_to_github():
 
 # Main script
 if __name__ == "__main__":
-    keywords = ["How to play football?"]
+    keywords = ["what is gluten?"]
     output_dir = "docs"
     os.makedirs(output_dir, exist_ok=True)
     cname_filepath = os.path.join(output_dir, "CNAME")
