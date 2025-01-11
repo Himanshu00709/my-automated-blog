@@ -111,7 +111,7 @@ def save_formatted_html(post, output_dir):
     <body>
         <div class="container">
             {post['content']}
-            <a href="index.html" class="back-link">Back to Home</a>
+            <a href="https://gfreelife.com" class="back-link">Back to Home</a>
         </div>
     </body>
     </html>
@@ -330,6 +330,8 @@ def push_to_github():
         # Commit with a timestamp
         commit_message = f"Automated update: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
         subprocess.run(["git", "commit", "-m", commit_message], check=True)
+        # Pull remote changes first to avoid conflicts
+        subprocess.run(["git", "pull", "origin", "main"], check=True)
         # Push to the main branch
         subprocess.run(["git", "push", "origin", "main"], check=True)
         print("Changes pushed to GitHub.")
@@ -340,7 +342,7 @@ def push_to_github():
 if __name__ == "__main__":
     # List of keywords or topics
     keywords = [
-        "How to grow a plant?"
+        "How to make a game in unity?"
     ]
 
     # Output directory for blog posts
