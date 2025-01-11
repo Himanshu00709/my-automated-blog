@@ -14,9 +14,9 @@ client = OpenAI(api_key=api_key, base_url=base_url)
 
 # Function to sanitize filenames and replace spaces with hyphens
 def sanitize_filename(filename):
-    sanitized = re.sub(r'[<>:"/\\|?*]', '_', filename)
-    sanitized = sanitized.replace(' ', '-')
-    sanitized = re.sub(r'[-_]+$', '', sanitized)
+    sanitized = re.sub(r'[<>:"/\\|?*]', '_', filename)  # Replace invalid characters
+    sanitized = sanitized.replace(' ', '-')  # Replace spaces with hyphens
+    sanitized = re.sub(r'[-_]+$', '', sanitized)  # Remove trailing hyphens/underscores
     return sanitized.lower()
 
 # Function to generate fully formatted HTML content using DeepSeek API
@@ -54,7 +54,10 @@ def determine_category(keyword):
         result = response.choices[0].message.content.strip()
         if "/" in result:
             category, subcategory = result.split("/", 1)
-            return category.strip(), subcategory.strip()
+            # Sanitize category and subcategory names
+            category = sanitize_filename(category.strip())
+            subcategory = sanitize_filename(subcategory.strip())
+            return category, subcategory
         else:
             return "uncategorized", "uncategorized"
     except Exception as e:
@@ -146,6 +149,9 @@ def save_formatted_html(post, output_dir, category, subcategory):
     </body>
     </html>
     """
+    # Sanitize category and subcategory names
+    category = sanitize_filename(category)
+    subcategory = sanitize_filename(subcategory)
     category_dir = os.path.join(output_dir, category)
     subcategory_dir = os.path.join(category_dir, subcategory)
     os.makedirs(subcategory_dir, exist_ok=True)
@@ -420,6 +426,8 @@ def generate_index_html(blog_posts, output_dir, categories):
 # Function to generate category pages
 def generate_category_pages(categories, output_dir):
     for category, subcategories in categories.items():
+        # Sanitize category name
+        category = sanitize_filename(category)
         category_dir = os.path.join(output_dir, category)
         os.makedirs(category_dir, exist_ok=True)
         category_content = f"""
@@ -595,6 +603,8 @@ def generate_category_pages(categories, output_dir):
             <div class="grid-container">
         """
         for subcategory in subcategories:
+            # Sanitize subcategory name
+            subcategory = sanitize_filename(subcategory)
             category_content += f"""
                 <div class="grid-col">
                     <div class="icon">
@@ -626,6 +636,9 @@ def generate_category_pages(categories, output_dir):
 def generate_subcategory_pages(categories, output_dir, blog_posts):
     for category, subcategories in categories.items():
         for subcategory in subcategories:
+            # Sanitize category and subcategory names
+            category = sanitize_filename(category)
+            subcategory = sanitize_filename(subcategory)
             subcategory_dir = os.path.join(output_dir, category, subcategory)
             os.makedirs(subcategory_dir, exist_ok=True)
             subcategory_content = f"""
