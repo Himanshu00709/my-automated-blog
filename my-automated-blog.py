@@ -134,21 +134,6 @@ def save_formatted_html(post, output_dir, category, subcategory):
                 margin-top: 20px;
                 font-size: 16px;
             }}
-            footer {{
-                margin-top: 40px;
-                padding: 20px;
-                background: #2c3e50;
-                color: #fff;
-                text-align: center;
-                border-radius: 10px;
-            }}
-            footer a {{
-                color: #3498db;
-                text-decoration: none;
-            }}
-            footer a:hover {{
-                text-decoration: underline;
-            }}
         </style>
     </head>
     <body>
@@ -156,9 +141,6 @@ def save_formatted_html(post, output_dir, category, subcategory):
             {post['content']}
             <a href="https://gfreelife.com" class="back-link">Back to Home</a>
         </div>
-        <footer>
-            <p>&copy; 2023 GFreeLife. All rights reserved. | <a href="https://gfreelife.com/privacy-policy">Privacy Policy</a> | <a href="https://gfreelife.com/terms-of-service">Terms of Service</a></p>
-        </footer>
     </body>
     </html>
     """
@@ -376,21 +358,6 @@ def generate_index_html(blog_posts, output_dir, categories):
             .nav-item:hover .dropdown-menu {{
                 display: block;
             }}
-            footer {{
-                margin-top: 40px;
-                padding: 20px;
-                background: #2c3e50;
-                color: #fff;
-                text-align: center;
-                border-radius: 10px;
-            }}
-            footer a {{
-                color: #3498db;
-                text-decoration: none;
-            }}
-            footer a:hover {{
-                text-decoration: underline;
-            }}
         </style>
     </head>
     <body>
@@ -415,9 +382,6 @@ def generate_index_html(blog_posts, output_dir, categories):
         """
     index_content += """
         </div>
-        <footer>
-            <p>&copy; 2023 GFreeLife. All rights reserved. | <a href="https://gfreelife.com/privacy-policy">Privacy Policy</a> | <a href="https://gfreelife.com/terms-of-service">Terms of Service</a></p>
-        </footer>
     </body>
     </html>
     """
@@ -575,21 +539,6 @@ def generate_category_pages(categories, output_dir):
                 .nav-item:hover .dropdown-menu {{
                     display: block;
                 }}
-                footer {{
-                    margin-top: 40px;
-                    padding: 20px;
-                    background: #2c3e50;
-                    color: #fff;
-                    text-align: center;
-                    border-radius: 10px;
-                }}
-                footer a {{
-                    color: #3498db;
-                    text-decoration: none;
-                }}
-                footer a:hover {{
-                    text-decoration: underline;
-                }}
             </style>
         </head>
         <body>
@@ -621,9 +570,6 @@ def generate_category_pages(categories, output_dir):
             """
         category_content += """
             </div>
-            <footer>
-                <p>&copy; 2023 GFreeLife. All rights reserved. | <a href="https://gfreelife.com/privacy-policy">Privacy Policy</a> | <a href="https://gfreelife.com/terms-of-service">Terms of Service</a></p>
-            </footer>
         </body>
         </html>
         """
@@ -782,21 +728,6 @@ def generate_subcategory_pages(categories, output_dir, blog_posts):
                     .nav-item:hover .dropdown-menu {{
                         display: block;
                     }}
-                    footer {{
-                        margin-top: 40px;
-                        padding: 20px;
-                        background: #2c3e50;
-                        color: #fff;
-                        text-align: center;
-                        border-radius: 10px;
-                    }}
-                    footer a {{
-                        color: #3498db;
-                        text-decoration: none;
-                    }}
-                    footer a:hover {{
-                        text-decoration: underline;
-                    }}
                 </style>
             </head>
             <body>
@@ -832,9 +763,6 @@ def generate_subcategory_pages(categories, output_dir, blog_posts):
                 """
             subcategory_content += """
                 </div>
-                <footer>
-                    <p>&copy; 2023 GFreeLife. All rights reserved. | <a href="https://gfreelife.com/privacy-policy">Privacy Policy</a> | <a href="https://gfreelife.com/terms-of-service">Terms of Service</a></p>
-                </footer>
             </body>
             </html>
             """
@@ -860,7 +788,7 @@ def push_to_github():
 
 # Main script
 if __name__ == "__main__":
-    keywords = ["How to fight like boxer?"]
+    keywords = ["How to do trading?"]
     output_dir = "docs"
     os.makedirs(output_dir, exist_ok=True)
     cname_filepath = os.path.join(output_dir, "CNAME")
