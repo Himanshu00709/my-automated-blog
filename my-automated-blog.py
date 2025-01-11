@@ -231,6 +231,7 @@ def generate_index_html(blog_posts, output_dir):
             <div class="grid">
     """
 
+    # Add all blog posts to the grid
     for post in blog_posts:
         # Sanitize the filename
         filename = sanitize_filename(f"{post['title'].lower().replace(' ', '_')}.html")
@@ -286,7 +287,8 @@ def push_to_github():
 if __name__ == "__main__":
     # List of keywords or topics
     keywords = [
-        "How to make a origami elephant?"
+      
+        "How to Cook Pasta"
     ]
 
     # Generate blog posts for each keyword
