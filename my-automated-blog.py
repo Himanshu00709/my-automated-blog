@@ -344,7 +344,7 @@ def push_to_github():
 if __name__ == "__main__":
     # List of keywords or topics
     keywords = [
-        "what is google?"
+        "How to drive a car?"
     ]
 
     # Output directory for blog posts
