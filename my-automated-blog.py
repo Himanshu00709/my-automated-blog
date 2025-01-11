@@ -64,7 +64,7 @@ def save_formatted_html(post, output_dir):
             body {{
                 margin: 0;
                 padding: 0;
-                background: linear-gradient(135deg, #2c3e50, #34495e); /* Gradient background */
+                background: #2c3e50; /* Dark blue background */
                 font-family: "Figtree", sans-serif;
                 display: flex;
                 align-items: center;
@@ -73,7 +73,7 @@ def save_formatted_html(post, output_dir):
                 color: white; /* White text */
             }}
             .container {{
-                background: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
+                background: #34495e; /* Slightly lighter blue for the container */
                 max-width: 800px;
                 margin: 20px;
                 padding: 20px;
@@ -178,7 +178,7 @@ def generate_index_html(blog_posts, output_dir):
                 width: 100%;
                 height: 100vh;
                 font-family: 'Roboto';
-                background: linear-gradient(135deg, #2c3e50, #34495e); /* Gradient background */
+                background: #2c3e50; /* Dark blue background */
                 margin: 0;
                 padding: 0;
                 color: white;
@@ -226,7 +226,7 @@ def generate_index_html(blog_posts, output_dir):
             }
 
             .body-content {
-                background: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
+                background: #34495e; /* Slightly lighter blue for the container */
                 padding: 20px;
                 position: relative;
                 border-radius: 10px;
@@ -327,7 +327,7 @@ def push_to_github():
 if __name__ == "__main__":
     # List of keywords or topics
     keywords = [
-        "How to do surgery?"
+        "who is elon musk? "
     ]
 
     # Output directory for blog posts
