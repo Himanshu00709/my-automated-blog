@@ -25,7 +25,7 @@ def generate_formatted_html(prompt):
         response = client.chat.completions.create(
             model="deepseek-chat",
             messages=[
-                {"role": "system", "content": "You are a expert writer that generates fully formatted HTML content for blog posts, including headlines, paragraphs, and basic styling.Make sure to add as many tables as you can and write 1000-word articles minimum. Write like a niche expert and doctor. write long paragraphs not fluffy content provide as rich content as you can Return only the HTML code, nothing else. "},
+                {"role": "system", "content": "You are a helpful assistant that generates fully formatted HTML content for blog posts, including headlines, paragraphs, and basic styling. Return only the HTML code, nothing else. Make sure to add as many tables as you can and write 1000-word articles minimum. Write like a niche expert and doctor. write long paragraphs not fluffy content"},
                 {"role": "user", "content": prompt},
             ],
             stream=False
@@ -609,7 +609,7 @@ def generate_category_pages(categories, output_dir):
         category_content += """
             </div>
             <footer>
-                <p>&copy; 2025 GFreeLife. All rights reserved. | <a href="/">Home</a> | <a href="/categories">Categories</a></p>
+                <p>&copy; {datetime.now().year} GFreeLife. All rights reserved. | <a href="/">Home</a> | <a href="/categories">Categories</a></p>
             </footer>
         </body>
         </html>
@@ -864,15 +864,7 @@ def push_to_github():
 # Main script
 if __name__ == "__main__":
     keywords = [
-        "12 inch gluten free wraps",
-"8 week glute transformation",
-"acini de pepe gluten free",
-"amaro nonino gluten free",
-"ancient grain bread gluten free",
-"apollo burger gluten free",
-"are cookout hush puppies gluten free",
-"are croquettes gluten free",
-"are freeze dried skittles gluten free"
+        "acini de pepe gluten free"
     ]
     output_dir = "docs"
     os.makedirs(output_dir, exist_ok=True)
@@ -894,10 +886,10 @@ if __name__ == "__main__":
         # Skip exact match keywords if they already exist
         post_exists = any(post["title"] == keyword for post in existing_posts)
         if not post_exists:
-            # Generate blog post in a separate thread
+            # Create a thread for each blog post generation
             thread = threading.Thread(target=lambda k=keyword: blog_posts.append(generate_blog_post(k)))
-            thread.start()
             threads.append(thread)
+            thread.start()
         else:
             print(f"Post already exists: {keyword}")
     
@@ -920,13 +912,13 @@ if __name__ == "__main__":
     # Combine existing posts and new posts
     all_posts = existing_posts + blog_posts
     
-    # Save new posts in separate threads
+    # Save new posts using threading
     save_threads = []
     for post in blog_posts:
         if post:
             thread = threading.Thread(target=save_formatted_html, args=(post, output_dir, post['category'], post['subcategory']))
-            thread.start()
             save_threads.append(thread)
+            thread.start()
     
     # Wait for all save threads to complete
     for thread in save_threads:
