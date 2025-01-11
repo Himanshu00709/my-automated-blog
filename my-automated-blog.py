@@ -136,6 +136,28 @@ def extract_preview(html_content):
     # Return the first 200 characters (or less) as a preview
     return plain_text[:200] + "..."
 
+# Function to scan the docs folder for existing posts
+def scan_existing_posts(output_dir):
+    existing_posts = []
+    for filename in os.listdir(output_dir):
+        if filename.endswith(".html") and filename != "index.html":
+            filepath = os.path.join(output_dir, filename)
+            try:
+                with open(filepath, "r", encoding="utf-8") as file:
+                    content = file.read()
+                    # Extract the title from the <title> tag
+                    title_match = re.search(r'<title>(.*?)</title>', content)
+                    if title_match:
+                        title = title_match.group(1)
+                        existing_posts.append({
+                            "title": title,
+                            "content": content,
+                            "filename": filename
+                        })
+            except Exception as e:
+                print(f"Error reading file {filename}: {e}")
+    return existing_posts
+
 # Function to generate index.html with a grid layout (4 posts per row)
 def generate_index_html(blog_posts, output_dir):
     index_content = """
@@ -234,7 +256,7 @@ def generate_index_html(blog_posts, output_dir):
     # Add all blog posts to the grid
     for post in blog_posts:
         # Sanitize the filename
-        filename = sanitize_filename(f"{post['title'].lower().replace(' ', '_')}.html")
+        filename = post.get("filename", sanitize_filename(f"{post['title'].lower().replace(' ', '_')}.html"))
         # Extract the first few lines of meaningful text
         preview = extract_preview(post['content'])
         index_content += f"""
@@ -287,31 +309,41 @@ def push_to_github():
 if __name__ == "__main__":
     # List of keywords or topics
     keywords = [
-        "How to make a wine?",
-        "How to tell a lie?"
+        "How to design in autocad?"
     ]
+
+    # Output directory for blog posts
+    output_dir = "docs"
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Scan existing posts in the docs folder
+    existing_posts = scan_existing_posts(output_dir)
 
     # Generate blog posts for each keyword
     blog_posts = []
     for keyword in keywords:
-        post = generate_blog_post(keyword)
-        if post:
-            blog_posts.append(post)
-            print(f"Generated post: {post['title']}")
-            print(f"Content preview: {post['content'][:100]}...")  # Debug: Print a preview of the content
+        # Check if the post already exists
+        post_exists = any(post["title"] == keyword for post in existing_posts)
+        if not post_exists:
+            post = generate_blog_post(keyword)
+            if post:
+                blog_posts.append(post)
+                print(f"Generated post: {post['title']}")
+                print(f"Content preview: {post['content'][:100]}...")  # Debug: Print a preview of the content
+            else:
+                print(f"Failed to generate post for: {keyword}")
         else:
-            print(f"Failed to generate post for: {keyword}")
+            print(f"Post already exists: {keyword}")
 
-    # Save blog posts to files
-    output_dir = "docs"  # Changed from "blog_posts" to "docs"
-    os.makedirs(output_dir, exist_ok=True)
+    # Combine existing and new posts
+    all_posts = existing_posts + blog_posts
 
-    # Generate individual HTML files for each post
+    # Generate individual HTML files for new posts
     for post in blog_posts:
         save_formatted_html(post, output_dir)
 
     # Generate index.html
-    generate_index_html(blog_posts, output_dir)
+    generate_index_html(all_posts, output_dir)
 
     # Push changes to GitHub
     push_to_github()
