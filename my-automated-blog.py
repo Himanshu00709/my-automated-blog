@@ -23,7 +23,7 @@ def generate_formatted_html(prompt):
         response = client.chat.completions.create(
             model="deepseek-chat",
             messages=[
-                {"role": "system", "content": "You are a helpful assistant that generates fully formatted HTML content for blog posts, including headlines, paragraphs, and basic styling. Return only the HTML code, nothing else."},
+                {"role": "system", "content": "You are a helpful assistant that generates fully formatted HTML content for blog posts, including headlines, paragraphs, and basic styling. Return only the HTML code, nothing else. make sure to add as much tables as you can and write 1000 words articles minimum"},
                 {"role": "user", "content": prompt},
             ],
             stream=False
@@ -788,7 +788,7 @@ def push_to_github():
 
 # Main script
 if __name__ == "__main__":
-    keywords = ["How to do trading?"]
+    keywords = ["what is investment banking?"]
     output_dir = "docs"
     os.makedirs(output_dir, exist_ok=True)
     cname_filepath = os.path.join(output_dir, "CNAME")
