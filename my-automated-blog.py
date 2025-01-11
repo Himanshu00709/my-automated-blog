@@ -206,6 +206,31 @@ def scan_existing_posts(output_dir):
                     print(f"Error reading file {filename}: {e}")
     return existing_posts
 
+# Function to generate a navigation menu based on categories and subcategories
+def generate_navigation_menu(categories):
+    menu_items = []
+    for category, subcategories in categories.items():
+        menu_items.append(f'<li class="nav-item dropdown">')
+        menu_items.append(f'<a class="nav-link dropdown-toggle" href="/{category}" id="{category}-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{category.capitalize()}</a>')
+        menu_items.append('<div class="dropdown-menu" aria-labelledby="{category}-dropdown">')
+        for subcategory in subcategories:
+            menu_items.append(f'<a class="dropdown-item" href="/{category}/{subcategory}">{subcategory.capitalize()}</a>')
+        menu_items.append('</div>')
+        menu_items.append('</li>')
+    return f"""
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="https://gfreelife.com">GFreeLife</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                {"".join(menu_items)}
+            </ul>
+        </div>
+    </nav>
+    """
+
 # Function to generate index.html with the new design
 def generate_index_html(blog_posts, output_dir):
     index_content = """
@@ -331,6 +356,7 @@ def generate_index_html(blog_posts, output_dir):
         </style>
     </head>
     <body>
+        {generate_navigation_menu(categories)}
         <h1>Latest news</h1>
         <div class="grid-container">
     """
@@ -389,7 +415,7 @@ def push_to_github():
 if __name__ == "__main__":
     # List of keywords or topics
     keywords = [
-        "How to buy a ps5?"
+        "what is gluten free food?"
     ]
 
     # Output directory for blog posts
@@ -400,6 +426,9 @@ if __name__ == "__main__":
     cname_filepath = os.path.join(output_dir, "CNAME")
     with open(cname_filepath, "w") as cname_file:
         cname_file.write("gfreelife.com")
+
+    # Track categories and subcategories
+    categories = defaultdict(set)
 
     # Scan existing posts in the docs folder
     existing_posts = scan_existing_posts(output_dir)
@@ -414,6 +443,7 @@ if __name__ == "__main__":
             if post:
                 # Determine the category and subcategory using DeepSeek API
                 category, subcategory = determine_category(keyword)
+                categories[category].add(subcategory)
                 blog_posts.append({
                     **post,
                     "category": category,
