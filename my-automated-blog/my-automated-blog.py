@@ -42,7 +42,7 @@ def generate_blog_post(keyword):
     if html_content:
         print(f"Successfully generated content for: {keyword}")
         return {
-            "title": keyword,  # Use the keyword as the title (removed "Blog Post:" prefix)
+            "title": keyword,  # Use the keyword as the title
             "content": html_content
         }
     else:
@@ -117,7 +117,7 @@ def save_formatted_html(post, output_dir):
     </html>
     """
 
-    # Sanitize the filename (removed "blog_post__" prefix)
+    # Sanitize the filename
     filename = sanitize_filename(f"{post['title'].lower().replace(' ', '_')}.html")
     filepath = os.path.join(output_dir, filename)
     try:
@@ -232,7 +232,7 @@ def generate_index_html(blog_posts, output_dir):
     """
 
     for post in blog_posts:
-        # Sanitize the filename (removed "blog_post__" prefix)
+        # Sanitize the filename
         filename = sanitize_filename(f"{post['title'].lower().replace(' ', '_')}.html")
         # Extract the first few lines of meaningful text
         preview = extract_preview(post['content'])
@@ -301,7 +301,7 @@ if __name__ == "__main__":
             print(f"Failed to generate post for: {keyword}")
 
     # Save blog posts to files
-    output_dir = "docs"
+    output_dir = "docs"  # Changed from "blog_posts" to "docs"
     os.makedirs(output_dir, exist_ok=True)
 
     # Generate individual HTML files for each post
