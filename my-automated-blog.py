@@ -877,106 +877,306 @@ def push_to_github():
 # Main script
 if __name__ == "__main__":
     keywords = [
-      "gluten free bbq rub",
-"gluten free beef pot pie",
-"gluten free beer at trader joe's",
-"gluten free beer brewing kit",
-"gluten free beer kit",
-"gluten free beer making kit",
-"gluten free beer michelob ultra",
-"gluten free beer michelob ultra gold",
-"gluten free beer peroni",
-"gluten free beer subscription",
-"gluten free beers and ciders",
-"gluten free birthday cake delivered",
-"gluten free biscochitos",
-"gluten free biscochitos recipe",
-"gluten free biscotti to buy",
-"gluten free black vinegar",
-"gluten free blackberry scones",
-"gluten free blinis for caviar",
-"gluten free blueberry bagel recipe",
-"gluten free blueberry bagels",
-"gluten free blueberry biscuits",
-"gluten free bread crumbs for stuffing",
-"gluten free bread great harvest",
-"gluten free bread subscription box",
-"gluten free breaded fish frozen",
-"gluten free brittle",
-"gluten free brownie cupcakes",
-"gluten free brownie delivery",
-"gluten free brownies delivered",
-"gluten free brownies online",
-"gluten free bucatini",
-"gluten free butterscotch cookies",
-"gluten free cabbage rolls",
-"gluten free cadbury egg cookies",
-"gluten free cake tasting box",
-"gluten free canned cinnamon rolls",
-"gluten free cannelloni",
-"gluten free cannelloni pasta",
-"gluten free cardamom bread",
-"gluten free cardamom buns",
-"gluten free carrot cake delivery",
-"gluten free carrot cake roll",
-"gluten free casarecce pasta",
-"gluten free catering jimbaran",
-"gluten free cavatelli",
-"gluten free charcuterie board delivery",
-"gluten free cheesecake ice cream",
-"gluten free cheesecake to buy",
-"gluten free chicken and waffles",
-"gluten free chicken base",
-"gluten free chicken gravy packet",
-"gluten free chicken marsala recipe",
-"gluten free chicken nachos",
-"gluten free chicken ramen seasoning",
-"gluten free chipwich",
-"gluten free chocolate advent calendar",
-"gluten free chocolate chess pie",
-"gluten free chocolate chip oatmeal bars",
-"gluten free chocolate coins",
-"gluten free chocolate milk powder",
-"gluten free chocolate peanut butter balls",
-"gluten free chocolate peanut butter balls recipe",
-"gluten free cigarettes",
-"gluten free cinnamon rolls frozen",
-"gluten free cinnamon rolls premade",
-"gluten free cinnamon rolls shipped",
-"gluten free cocoa bombs",
-"gluten free communion bread recipe",
-"gluten free communion bread recipes",
-"gluten free communion wafer recipe",
-"gluten free communion wafers and juice",
-"gluten free communion wafers recipe",
-"gluten free communion wafers with juice",
-"gluten free cookie cake delivery",
-"gluten free cookie decorating kit",
-"gluten free cookie dough bark",
-"gluten free cookie dough to buy",
-"gluten free cookie kit",
-"gluten free cookies and cream",
-"gluten free cookies box",
-"gluten free cookies gift box",
-"gluten free corn flake crumbs",
-"gluten free corn free bread",
-"gluten free cornbread recipe with creamed corn",
-"gluten free cosmic brownies",
-"gluten free crab cakes frozen",
-"gluten free cranberry and white chocolate cookies",
-"gluten free cranberry cobbler",
-"gluten free cranberry white chocolate cookies",
-"gluten free croatia",
-"gluten free crock pot macaroni and cheese",
-"gluten free crock pot potato soup",
-"gluten free croquembouche",
-"gluten free cuban sandwich",
-"gluten free cupcakes order online",
-"gluten free custom cookies",
-"gluten free dairy free food delivery",
-"gluten free dairy free gift baskets",
-"gluten free dairy free gifts",
-"gluten free dairy free perogies"
+      "gluten free dairy free pierogi",
+"gluten free dairy free popcorn",
+"gluten free dairy free potluck ideas",
+"gluten free dairy free potluck recipes",
+"gluten free dairy free thanksgiving sides",
+"gluten free dairy free trail mix",
+"gluten free demi glace",
+"gluten free dessert dips",
+"gluten free dining at disney springs",
+"gluten free donut mix",
+"gluten free donuts online",
+"gluten free donuts order online",
+"gluten free donuts shipped",
+"gluten free dubai chocolate bar",
+"gluten free duck sauce",
+"gluten free dutch oven cobbler",
+"gluten free everything bagel",
+"gluten free falafel frozen",
+"gluten free flatbread crackers",
+"gluten free florida keys",
+"gluten free food in croatia",
+"gluten free franchise",
+"gluten free french bread pizza",
+"gluten free french fries recipe",
+"gluten free french recipes",
+"gluten free french toast sticks frozen",
+"gluten free fried oreos",
+"gluten free fried oysters",
+"gluten free frozen pizza dough",
+"gluten free gefilte fish",
+"gluten free gender reveal cake",
+"gluten free gift cards",
+"gluten free gingerbread house kit",
+"gluten free gingerbread house kits",
+"gluten free gingerbread kit",
+"gluten free gooey butter cake",
+"gluten free gourmet chocolates",
+"gluten free graduation cookies",
+"gluten free gravy granules",
+"gluten free gravy mixes",
+"gluten free greek cookies",
+"gluten free greek recipes",
+"gluten free hampers uk",
+"gluten free hanukkah cookies",
+"gluten free harvest bread",
+"gluten free heart shaped pizza",
+"gluten free hello dolly bars",
+"gluten free hobnobs",
+"gluten free homebrew beer kits",
+"gluten free honey bun",
+"gluten free hot water crust",
+"gluten free hot water crust pastry",
+"gluten free hotels italy",
+"gluten free hungarian cookies",
+"gluten free instapot recipes",
+"gluten free invisible apple cake",
+"gluten free islands of adventure",
+"gluten free italian anise cookies",
+"gluten free italian anisette cookies",
+"gluten free italian cream cake",
+"gluten free italian rainbow cookies",
+"gluten free jalapeno cheddar bread",
+"gluten free joe joe's",
+"gluten free key lime cookies",
+"gluten free kibbeh",
+"gluten free king cake shipped",
+"gluten free knish",
+"gluten free koulourakia",
+"gluten free kourabiedes",
+"gluten free kreplach",
+"gluten free kugel",
+"gluten free lefse for sale",
+"gluten free lefse with instant potatoes",
+"gluten free lussekatter",
+"gluten free m and m cookies",
+"gluten free m&m cookie recipe",
+"gluten free mac and cheese trader joe's",
+"gluten free main dish for potluck",
+"gluten free main dishes for potluck",
+"gluten free mama flour",
+"gluten free mandel bread",
+"gluten free mango muffins",
+"gluten free matzo ball soup mix",
+"gluten free meat rubs",
+"gluten free merch",
+"gluten free mini cookies",
+"gluten free mississippi mud pie",
+"gluten free monkey bread with pizza dough",
+"gluten free mooncakes",
+"gluten free moravian cookies",
+"gluten free moscow mule",
+"gluten free mother's day",
+"gluten free mr kipling",
+"gluten free mystery box",
+"gluten free new products",
+"gluten free new york bagels shipped",
+"gluten free non alcoholic drinks",
+"gluten free noodle kugel",
+"gluten free north shore",
+"gluten free oat matzo",
+"gluten free oatmeal butterscotch cookies"
+"gluten free oatmeal scotchies"
+"gluten free orecchiette pasta"
+"gluten free oreo crust recipe"
+"gluten free oreo ice cream"
+"gluten free organic bagels"
+"gluten free ornament"
+"gluten free palmiers"
+"gluten free pandoro"
+"gluten free pasta gift baskets"
+"gluten free pasta making class"
+"gluten free pasta shells for stuffing"
+"gluten free pasta suppliers"
+"gluten free peach galette"
+"gluten free peach rings"
+"gluten free peanut butter balls recipe"
+"gluten free peanut butter chocolate balls"
+"gluten free pepparkakor"
+"gluten free peppermint brownies"
+"gluten free pepperoni bread"
+"gluten free persimmon muffins"
+"gluten free persimmon pudding"
+"gluten free picnic hamper"
+"gluten free pigs in a blanket frozen"
+"gluten free pizza dough doves farm"
+"gluten free pizza dough frozen"
+"gluten free polish cookies"
+"gluten free popcorn tins"
+"gluten free pork recipes"
+"gluten free porter"
+"gluten free porter beer"
+"gluten free premade cinnamon rolls"
+"gluten free pretzel rings"
+"gluten free protein pumpkin bread"
+"gluten free pumpkin bread chocolate chip"
+"gluten free pumpkin chocolate chip bread"
+"gluten free pumpkin dip"
+"gluten free pumpkin ice cream"
+"gluten free pumpkin ravioli"
+"gluten free pumpkin trifle"
+"gluten free rainbow cookies"
+"gluten free ramen packets"
+"gluten free raspberry muffins"
+"gluten free recipes ireland"
+"gluten free red velvet brownies"
+"gluten free resort costa rica"
+"gluten free rhubarb tart"
+"gluten free rice vinegar"
+"gluten free riesling wine"
+"gluten free rigatoni noodles"
+"gluten free ring pasta"
+"gluten free rosh hashanah recipes"
+"gluten free rusks"
+"gluten free russian dressing"
+"gluten free saffron buns"
+"gluten free sake"
+"gluten free salisbury steak"
+"gluten free salt dough"
+"gluten free scones delivered"
+"gluten free scones delivery"
+"gluten free scones to buy"
+"gluten free scones without xanthan gum"
+"gluten free scotch eggs"
+"gluten free scotland"
+"gluten free seafood boil"
+"gluten free seafood breader"
+"gluten free semla"
+"gluten free seoul"
+"gluten free shampoo bar"
+"gluten free sides for cookout"
+"gluten free slider buns to buy"
+"gluten free slow cooker potato soup"
+"gluten free slutty brownies"
+"gluten free snack box gift"
+"gluten free snack packages"
+"gluten free snickerdoodle bars"
+"gluten free snow cone syrup"
+"gluten free soju"
+"gluten free soup mix"
+"gluten free soup mixes"
+"gluten free sour cream pound cake"
+"gluten free sourdough bagel recipe"
+"gluten free sourdough bread delivery"
+"gluten free sourdough bread for sale"
+"gluten free sourdough bread to buy"
+"gluten free sourdough focaccia"
+"gluten free sourdough kit"
+"gluten free sourdough san francisco"
+"gluten free sourdough starter for sale"
+"gluten free spicy ramen"
+"gluten free spicy ramen noodles"
+"gluten free spinach bread"
+"gluten free spinach casserole"
+"gluten free ssamjang"
+"gluten free st joseph zeppole"
+"gluten free starter kit"
+"gluten free sticker"
+"gluten free stocking stuffers"
+"gluten free stollen buy"
+"gluten free stollen to buy"
+"gluten free stromboli dough recipe"
+"gluten free stromboli recipe"
+"gluten free stuffed cabbage"
+"gluten free stuffed cookies"
+"gluten free stuffed pork chops"
+"gluten free stuffed shells recipe"
+"gluten free sugar cookie bars"
+"gluten free sugar free cheesecake"
+"gluten free sugar free pancakes"
+"gluten free summer side dishes"
+"gluten free super bowl"
+"gluten free super bowl desserts"
+"gluten free super bowl foods"
+"gluten free superbowl snacks"
+"gluten free swaps"
+"gluten free swedish candy"
+"gluten free sweet and sour sauce for meatballs"
+"gluten free swiss roll to buy"
+"gluten free t shirt"
+"gluten free taralli"
+"gluten free tea sandwiches"
+"gluten free tequeños"
+"gluten free thanksgiving dinner near me"
+"gluten free toilet paper"
+"gluten free tonic"
+"gluten free turkey and dumplings"
+"gluten free turkey recipes"
+"gluten free vanilla vodka"
+"gluten free vasilopita"
+"gluten free vegan cupcakes delivery"
+"gluten free vegan latkes"
+"gluten free vegan perogies"
+"gluten free vegan pierogi"
+"gluten free vodka belvedere"
+"gluten free wedding cake sampler"
+"gluten free wedding cake samples"
+"gluten free wedding cake tasting"
+"gluten free wedding cakes"
+"gluten free whipped shortbread cookies"
+"gluten free white chocolate and cranberry cookies"
+"gluten free white chocolate cranberry cookies"
+"gluten free wiener schnitzel"
+"gluten free wonton chips"
+"gluten freedom sweet potato bread"
+"gluten off bakery"
+"gluten popcorn"
+"gluten replacer"
+"gluten revolution"
+"gluten sugar free pumpkin bread"
+"gluten test kit for beer"
+"gluten-free communion bread recipe"
+"gluten-free super bowl snacks"
+"glutenberg beer gluten free"
+"glúten de trigo"
+"goat cheese cheesecake gluten free"
+"good times gluten free"
+"granoro gluten free pasta"
+"great harvest bread company gluten free"
+"great harvest bread gluten free"
+"great harvest gluten free bread"
+"greek gluten free card"
+"haldiram gluten free chapati"
+"hanukkah recipes gluten free"
+"harina de avena integral sin gluten"
+"harina de avena sin gluten"
+"harvest bread company gluten free"
+"hello dolly bars gluten free"
+"hikari gluta"
+"hoist glute master weight chart"
+"hot water crust pastry gluten free"
+"how much gluten is in guinness"
+"how to engage glutes when running"
+"individually wrapped gluten free communion wafers"
+"individually wrapped gluten free cookies"
+"is arroz con leche gluten free"
+"is asahi gluten free"
+"is beer cheese gluten free"
+"is belvedere gluten free"
+"is captain morgan sliced variety pack gluten free"
+"is dashi gluten free"
+"is dream oat milk gluten free"
+"is dulce de leche gluten free"
+"is fregola gluten free"
+"is furikake gluten free"
+"is garage beer gluten free"
+"is gekkeikan sake gluten free"
+"is korean fried chicken gluten free"
+"is masago gluten free"
+"is mich ultra gold gluten free"
+"is mich ultra pure gold gluten free"
+"is miller high life gluten free"
+"is natamycin gluten free"
+"is old dutch puffcorn gluten free"
+"is parrot bay gluten free"
+"is popeyes grilled chicken gluten-free"
+"is popeyes red beans and rice gluten free"
+"is shrimp fried rice gluten free"
+"is truffle oil gluten free"
+"ishin gluta"
+"jack's bbq gluten free"
     ]
     output_dir = "docs"
     os.makedirs(output_dir, exist_ok=True)
