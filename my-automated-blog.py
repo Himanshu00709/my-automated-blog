@@ -131,6 +131,9 @@ def save_formatted_html(post, output_dir):
 def extract_preview(html_content):
     # Remove HTML tags and extract plain text
     plain_text = re.sub(r'<[^>]+>', '', html_content)
+    # Remove CSS blocks and comments
+    plain_text = re.sub(r'\{.*?\}', '', plain_text)  # Remove CSS rules
+    plain_text = re.sub(r'/\*.*?\*/', '', plain_text)  # Remove CSS comments
     # Remove extra whitespace and newlines
     plain_text = re.sub(r'\s+', ' ', plain_text).strip()
     # Return the first 200 characters (or less) as a preview
@@ -170,8 +173,6 @@ def generate_index_html(blog_posts, output_dir):
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <style>
-            $midnight: #2c3e50;
-
             body {
                 width: 100%;
                 height: 100vh;
@@ -194,7 +195,7 @@ def generate_index_html(blog_posts, output_dir):
                 left: 0;
                 width: 80px;
                 height: 4px;
-                background: $midnight;
+                background: #2c3e50;
             }
 
             .grid-container {
@@ -220,10 +221,10 @@ def generate_index_html(blog_posts, output_dir):
             }
 
             .body-content {
-                background: $midnight;
+                background: #2c3e50;
                 padding: 0 30px 120px 40px;
                 position: relative;
-                border: 1px solid $midnight;
+                border: 1px solid #2c3e50;
                 border-top: none;
                 z-index: 1;
                 line-height: 23px;
@@ -239,9 +240,9 @@ def generate_index_html(blog_posts, output_dir):
                 left: -1px;
                 width: 100%;
                 height: 50px;
-                background: $midnight;
-                border-left: 1px solid $midnight;
-                border-right: 1px solid $midnight;
+                background: #2c3e50;
+                border-left: 1px solid #2c3e50;
+                border-right: 1px solid #2c3e50;
                 transform: skewY(5deg);
                 z-index: -1;
                 box-shadow: 0 -4px 5px rgba(0,0,0,0.4);
@@ -264,7 +265,7 @@ def generate_index_html(blog_posts, output_dir):
                 line-height: 60px;
                 text-align: center;
                 background: #fff;
-                color: $midnight;
+                color: #2c3e50;
                 -webkit-border-radius: 50%;
                 -moz-border-radius: 50%;
                 border-radius: 50%;
@@ -342,7 +343,7 @@ def push_to_github():
 if __name__ == "__main__":
     # List of keywords or topics
     keywords = [
-        "How to make a game in unity?"
+        "How to design in autocad?"
     ]
 
     # Output directory for blog posts
