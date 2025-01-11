@@ -37,6 +37,33 @@ def generate_formatted_html(prompt):
         print(f"Error generating content: {e}")
         return None
 
+# Function to determine category and subcategory using DeepSeek API
+def determine_category(keyword):
+    prompt = f"""
+    Determine the most appropriate category and subcategory for the following keyword: "{keyword}".
+    Return the result in the format: "category/subcategory".
+    For example, for "how to buy a skateboard?", return "buying-guide/skateboard".
+    """
+    try:
+        response = client.chat.completions.create(
+            model="deepseek-chat",  # Specify the model
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant that determines the category and subcategory for a given keyword."},
+                {"role": "user", "content": prompt},
+            ],
+            stream=False
+        )
+        result = response.choices[0].message.content.strip()
+        # Split into category and subcategory
+        if "/" in result:
+            category, subcategory = result.split("/", 1)
+            return category.strip(), subcategory.strip()
+        else:
+            return "uncategorized", "uncategorized"
+    except Exception as e:
+        print(f"Error determining category: {e}")
+        return "uncategorized", "uncategorized"
+
 # Function to generate a blog post with fully formatted HTML
 def generate_blog_post(keyword):
     prompt = f"""
@@ -56,61 +83,8 @@ def generate_blog_post(keyword):
         print(f"Failed to generate content for: {keyword}")
         return None
 
-# Function to categorize posts based on keywords
-def categorize_post(title):
-    # Example categorization logic (can be customized)
-    if "gluten free" in title.lower():
-        return "food", "gluten-free"
-    elif "recipe" in title.lower():
-        return "food", "recipes"
-    elif "health" in title.lower():
-        return "lifestyle", "health"
-    else:
-        return "general", "uncategorized"
-
-# Function to generate breadcrumbs
-def generate_breadcrumbs(category, subcategory, title):
-    return f"""
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="https://gfreelife.com">Home</a></li>
-            <li class="breadcrumb-item"><a href="https://gfreelife.com/{category}">{category.capitalize()}</a></li>
-            <li class="breadcrumb-item"><a href="https://gfreelife.com/{category}/{subcategory}">{subcategory.capitalize()}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{title}</li>
-        </ol>
-    </nav>
-    """
-
-# Function to generate a navigation menu
-def generate_navigation_menu(categories):
-    menu_items = []
-    for category, subcategories in categories.items():
-        menu_items.append(f'<li class="nav-item dropdown">')
-        menu_items.append(f'<a class="nav-link dropdown-toggle" href="/{category}" id="{category}-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{category.capitalize()}</a>')
-        menu_items.append('<div class="dropdown-menu" aria-labelledby="{category}-dropdown">')
-        for subcategory in subcategories:
-            menu_items.append(f'<a class="dropdown-item" href="/{category}/{subcategory}">{subcategory.capitalize()}</a>')
-        menu_items.append('</div>')
-        menu_items.append('</li>')
-    return f"""
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="https://gfreelife.com">GFreeLife</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                {"".join(menu_items)}
-            </ul>
-        </div>
-    </nav>
-    """
-
 # Function to save the formatted HTML content to a file
 def save_formatted_html(post, output_dir, category, subcategory):
-    # Generate breadcrumbs
-    breadcrumbs = generate_breadcrumbs(category, subcategory, post['title'])
-
     # Wrap the generated HTML in a full HTML template
     full_html = f"""
     <!DOCTYPE html>
@@ -120,7 +94,6 @@ def save_formatted_html(post, output_dir, category, subcategory):
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{post['title']}</title>
         <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <style>
             body {{
                 margin: 0;
@@ -170,9 +143,7 @@ def save_formatted_html(post, output_dir, category, subcategory):
         </style>
     </head>
     <body>
-        {generate_navigation_menu(categories)}
         <div class="container">
-            {breadcrumbs}
             {post['content']}
             <a href="https://gfreelife.com" class="back-link">Back to Home</a>
         </div>
@@ -418,7 +389,7 @@ def push_to_github():
 if __name__ == "__main__":
     # List of keywords or topics
     keywords = [
-        "how to buy a skateboard?"
+        "How to buy a ps5?"
     ]
 
     # Output directory for blog posts
@@ -429,9 +400,6 @@ if __name__ == "__main__":
     cname_filepath = os.path.join(output_dir, "CNAME")
     with open(cname_filepath, "w") as cname_file:
         cname_file.write("gfreelife.com")
-
-    # Track categories and subcategories
-    categories = defaultdict(set)
 
     # Scan existing posts in the docs folder
     existing_posts = scan_existing_posts(output_dir)
@@ -444,9 +412,8 @@ if __name__ == "__main__":
         if not post_exists:
             post = generate_blog_post(keyword)
             if post:
-                # Categorize the post
-                category, subcategory = categorize_post(post['title'])
-                categories[category].add(subcategory)
+                # Determine the category and subcategory using DeepSeek API
+                category, subcategory = determine_category(keyword)
                 blog_posts.append({
                     **post,
                     "category": category,
