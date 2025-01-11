@@ -24,7 +24,7 @@ def generate_formatted_html(prompt):
         response = client.chat.completions.create(
             model="deepseek-chat",
             messages=[
-                {"role": "system", "content": "You are a helpful assistant that generates fully formatted HTML content for blog posts, including headlines, paragraphs, and basic styling. Return only the HTML code, nothing else. Make sure to add as many tables as you can and write 1000-word articles minimum.strictly and write like niche expert or doctor"},
+                {"role": "system", "content": "You are a helpful assistant that generates fully formatted HTML content for blog posts, including headlines, paragraphs, and basic styling. Return only the HTML code, nothing else. Make sure to add as many tables as you can and write 1000-word articles minimum. Write like a niche expert and doctor."},
                 {"role": "user", "content": prompt},
             ],
             stream=False
@@ -216,7 +216,7 @@ def generate_navigation_menu(categories):
     </nav>
     """
 
-# Function to generate index.html without "Latest News"
+# Function to generate index.html with updated card content
 def generate_index_html(blog_posts, output_dir, categories):
     index_content = f"""
     <!DOCTYPE html>
@@ -287,6 +287,11 @@ def generate_index_html(blog_posts, output_dir, categories):
                 font-family: 'Roboto';
                 font-weight: 900;
                 font-size: 22px;
+            }}
+            .body-content p {{
+                font-size: 16px;
+                color: #ddd;
+                margin-bottom: 20px;
             }}
             .round-btn {{
                 position: absolute;
@@ -377,6 +382,7 @@ def generate_index_html(blog_posts, output_dir, categories):
     </head>
     <body>
         {generate_navigation_menu(categories)}
+        <h1>Welcome to GFreeLife</h1>
         <div class="grid-container">
     """
     for post in blog_posts:
@@ -389,7 +395,7 @@ def generate_index_html(blog_posts, output_dir, categories):
                 </div>
                 <div class="body-content">
                     <h3>{post['title']}</h3>
-                    
+                    <p>{preview}</p>
                     <a href="{url}" class="round-btn"><i class="fa fa-long-arrow-right"></i></a>
                 </div>
             </div>
@@ -857,9 +863,7 @@ def push_to_github():
 # Main script
 if __name__ == "__main__":
     keywords = [
-        "acini de pepe gluten free",
-"amaro nonino gluten free",
-"ancient grain bread gluten free"
+        "acini de pepe gluten free"
     ]
     output_dir = "docs"
     os.makedirs(output_dir, exist_ok=True)
