@@ -64,7 +64,7 @@ def save_formatted_html(post, output_dir):
             body {{
                 margin: 0;
                 padding: 0;
-                background: #2c3e50; /* Dark blue background */
+                background: linear-gradient(135deg, #2c3e50, #34495e); /* Gradient background */
                 font-family: "Figtree", sans-serif;
                 display: flex;
                 align-items: center;
@@ -73,7 +73,7 @@ def save_formatted_html(post, output_dir):
                 color: white; /* White text */
             }}
             .container {{
-                background: #34495e; /* Slightly lighter blue for the container */
+                background: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
                 max-width: 800px;
                 margin: 20px;
                 padding: 20px;
@@ -178,9 +178,10 @@ def generate_index_html(blog_posts, output_dir):
                 width: 100%;
                 height: 100vh;
                 font-family: 'Roboto';
-                background: #fff;
+                background: linear-gradient(135deg, #2c3e50, #34495e); /* Gradient background */
                 margin: 0;
                 padding: 0;
+                color: white;
             }
 
             h1 {
@@ -189,7 +190,7 @@ def generate_index_html(blog_posts, output_dir):
                 margin: 50px 5%;
                 text-transform: capitalize;
                 position: relative;
-                color: #2c3e50;
+                color: white;
             }
 
             h1:after {
@@ -199,7 +200,7 @@ def generate_index_html(blog_posts, output_dir):
                 left: 0;
                 width: 80px;
                 height: 4px;
-                background: #2c3e50;
+                background: #1abc9c; /* Teal for underline */
             }
 
             .grid-container {
@@ -221,11 +222,11 @@ def generate_index_html(blog_posts, output_dir):
                 font-size: 48px;
                 text-align: center;
                 margin-bottom: 20px;
-                color: #2c3e50;
+                color: #1abc9c; /* Teal for icon */
             }
 
             .body-content {
-                background: #2c3e50;
+                background: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
                 padding: 20px;
                 position: relative;
                 border-radius: 10px;
@@ -254,8 +255,8 @@ def generate_index_html(blog_posts, output_dir):
                 font-size: 22px;
                 line-height: 60px;
                 text-align: center;
-                background: #fff;
-                color: #2c3e50;
+                background: #1abc9c; /* Teal for button */
+                color: white;
                 border-radius: 50%;
                 z-index: 1;
                 transition: all 0.2s ease-in-out;
@@ -326,7 +327,7 @@ def push_to_github():
 if __name__ == "__main__":
     # List of keywords or topics
     keywords = [
-        "who is elon musk? "
+        "How to do surgery?"
     ]
 
     # Output directory for blog posts
