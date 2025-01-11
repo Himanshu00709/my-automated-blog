@@ -139,7 +139,7 @@ def save_formatted_html(post, output_dir, category, subcategory):
     <body>
         <div class="container">
             {post['content']}
-            <a href="https://gfreelife.com" class="back-link">Back to Home</a>
+            <a href="/" class="back-link">Back to Home</a>
         </div>
     </body>
     </html>
@@ -203,7 +203,7 @@ def generate_navigation_menu(categories):
         menu_items.append('</li>')
     return f"""
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="https://gfreelife.com">GFreeLife</a>
+        <a class="navbar-brand" href="/">GFreeLife</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -380,7 +380,7 @@ def generate_index_html(blog_posts, output_dir, categories):
         <div class="grid-container">
     """
     for post in blog_posts:
-        url = f"{post['category']}/{post['subcategory']}/{post['filename']}"
+        url = f"/{post['category']}/{post['subcategory']}/{post['filename']}"
         preview = extract_preview(post['content'])
         index_content += f"""
             <div class="grid-col">
@@ -574,7 +574,7 @@ def generate_category_pages(categories, output_dir):
         </head>
         <body>
             <nav class="navbar">
-                <a class="navbar-brand" href="https://gfreelife.com">GFreeLife</a>
+                <a class="navbar-brand" href="/">GFreeLife</a>
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="/">Home</a>
@@ -766,7 +766,7 @@ def generate_subcategory_pages(categories, output_dir, blog_posts):
             </head>
             <body>
                 <nav class="navbar">
-                    <a class="navbar-brand" href="https://gfreelife.com">GFreeLife</a>
+                    <a class="navbar-brand" href="/">GFreeLife</a>
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link" href="/">Home</a>
@@ -781,7 +781,7 @@ def generate_subcategory_pages(categories, output_dir, blog_posts):
             """
             subcategory_posts = [post for post in blog_posts if post['category'] == category and post['subcategory'] == subcategory]
             for post in subcategory_posts:
-                url = f"{post['category']}/{post['subcategory']}/{post['filename']}"
+                url = f"/{post['category']}/{post['subcategory']}/{post['filename']}"
                 preview = extract_preview(post['content'])
                 subcategory_content += f"""
                     <div class="grid-col">
