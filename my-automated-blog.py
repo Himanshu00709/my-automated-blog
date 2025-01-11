@@ -64,7 +64,7 @@ def save_formatted_html(post, output_dir):
             body {{
                 margin: 0;
                 padding: 0;
-                background: hsl(210, 29%, 24%);
+                background: hsl(47, 88%, 63%);
                 font-family: "Figtree", sans-serif;
                 display: flex;
                 align-items: center;
@@ -344,7 +344,7 @@ def push_to_github():
 if __name__ == "__main__":
     # List of keywords or topics
     keywords = [
-        "How to make a slime?"
+        "How to catch a ball?"
     ]
 
     # Output directory for blog posts
