@@ -8,24 +8,20 @@ from collections import defaultdict
 # Initialize the OpenAI client with DeepSeek API
 api_key = "sk-fe730eb5b82c40478fa6411e9f09bf1c"  # Replace with your DeepSeek API key
 base_url = "https://api.deepseek.com"  # DeepSeek base URL
-
 client = OpenAI(api_key=api_key, base_url=base_url)
 
 # Function to sanitize filenames and replace spaces with hyphens
 def sanitize_filename(filename):
-    # Replace special characters with underscores
     sanitized = re.sub(r'[<>:"/\\|?*]', '_', filename)
-    # Replace spaces with hyphens
     sanitized = sanitized.replace(' ', '-')
-    # Remove any trailing hyphens or underscores
     sanitized = re.sub(r'[-_]+$', '', sanitized)
-    return sanitized.lower()  # Convert to lowercase for consistency
+    return sanitized.lower()
 
 # Function to generate fully formatted HTML content using DeepSeek API
 def generate_formatted_html(prompt):
     try:
         response = client.chat.completions.create(
-            model="deepseek-chat",  # Specify the model
+            model="deepseek-chat",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant that generates fully formatted HTML content for blog posts, including headlines, paragraphs, and basic styling. Return only the HTML code, nothing else."},
                 {"role": "user", "content": prompt},
@@ -46,7 +42,7 @@ def determine_category(keyword):
     """
     try:
         response = client.chat.completions.create(
-            model="deepseek-chat",  # Specify the model
+            model="deepseek-chat",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant that determines the category and subcategory for a given keyword."},
                 {"role": "user", "content": prompt},
@@ -54,7 +50,6 @@ def determine_category(keyword):
             stream=False
         )
         result = response.choices[0].message.content.strip()
-        # Split into category and subcategory
         if "/" in result:
             category, subcategory = result.split("/", 1)
             return category.strip(), subcategory.strip()
@@ -76,7 +71,7 @@ def generate_blog_post(keyword):
     if html_content:
         print(f"Successfully generated content for: {keyword}")
         return {
-            "title": keyword,  # Use the keyword as the title
+            "title": keyword,
             "content": html_content
         }
     else:
@@ -85,7 +80,6 @@ def generate_blog_post(keyword):
 
 # Function to save the formatted HTML content to a file
 def save_formatted_html(post, output_dir, category, subcategory):
-    # Wrap the generated HTML in a full HTML template
     full_html = f"""
     <!DOCTYPE html>
     <html lang="en">
@@ -150,13 +144,9 @@ def save_formatted_html(post, output_dir, category, subcategory):
     </body>
     </html>
     """
-
-    # Create category and subcategory directories
     category_dir = os.path.join(output_dir, category)
     subcategory_dir = os.path.join(category_dir, subcategory)
     os.makedirs(subcategory_dir, exist_ok=True)
-
-    # Sanitize the filename and replace spaces with hyphens
     filename = sanitize_filename(f"{post['title']}.html")
     filepath = os.path.join(subcategory_dir, filename)
     try:
@@ -168,14 +158,10 @@ def save_formatted_html(post, output_dir, category, subcategory):
 
 # Function to extract the first few lines of meaningful text from HTML content
 def extract_preview(html_content):
-    # Remove HTML tags and extract plain text
     plain_text = re.sub(r'<[^>]+>', '', html_content)
-    # Remove CSS blocks and comments
-    plain_text = re.sub(r'\{.*?\}', '', plain_text)  # Remove CSS rules
-    plain_text = re.sub(r'/\*.*?\*/', '', plain_text)  # Remove CSS comments
-    # Remove extra whitespace and newlines
+    plain_text = re.sub(r'\{.*?\}', '', plain_text)
+    plain_text = re.sub(r'/\*.*?\*/', '', plain_text)
     plain_text = re.sub(r'\s+', ' ', plain_text).strip()
-    # Return the first 200 characters (or less) as a preview
     return plain_text[:200] + "..."
 
 # Function to scan the docs folder for existing posts
@@ -188,11 +174,9 @@ def scan_existing_posts(output_dir):
                 try:
                     with open(filepath, "r", encoding="utf-8") as file:
                         content = file.read()
-                        # Extract the title from the <title> tag
                         title_match = re.search(r'<title>(.*?)</title>', content)
                         if title_match:
                             title = title_match.group(1)
-                            # Extract category and subcategory from the filepath
                             relative_path = os.path.relpath(filepath, output_dir)
                             category, subcategory = os.path.split(os.path.dirname(relative_path))
                             existing_posts.append({
@@ -232,8 +216,8 @@ def generate_navigation_menu(categories):
     """
 
 # Function to generate index.html with the new design
-def generate_index_html(blog_posts, output_dir):
-    index_content = """
+def generate_index_html(blog_posts, output_dir, categories):
+    index_content = f"""
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -243,22 +227,22 @@ def generate_index_html(blog_posts, output_dir):
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <style>
-            body {
+            body {{
                 width: 100%;
                 height: 100vh;
                 font-family: 'Roboto';
                 background: #fff;
-            }
-
-            h1 {
+                margin: 0;
+                padding: 0;
+            }}
+            h1 {{
                 font-size: 42px;
                 font-weight: 900;
                 margin: 50px 5%;
                 text-transform: capitalize;
                 position: relative;
-            }
-
-            h1:after {
+            }}
+            h1:after {{
                 position: absolute;
                 content: '';
                 top: -10px;
@@ -266,68 +250,47 @@ def generate_index_html(blog_posts, output_dir):
                 width: 80px;
                 height: 4px;
                 background: #2c3e50;
-            }
-
-            .grid-container {
+            }}
+            .grid-container {{
                 width: 90%;
                 margin: 0 auto;
-            }
-
-            .grid-col {
-                width: 33.3%;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+            }}
+            .grid-col {{
+                flex: 1 1 calc(33.3% - 20px);
                 min-width: 300px;
                 box-sizing: border-box;
-                padding-right: 20px;
                 margin-bottom: 20px;
-                float: left;
-            }
-
-            .grid-col .icon {
+            }}
+            .grid-col .icon {{
                 font-size: 48px;
                 text-align: center;
                 margin-bottom: 20px;
                 color: #2c3e50;
-            }
-
-            .body-content {
+            }}
+            .body-content {{
                 background: #2c3e50;
-                padding: 0 30px 120px 40px;
+                padding: 20px;
                 position: relative;
                 border: 1px solid #2c3e50;
                 border-top: none;
                 z-index: 1;
                 line-height: 23px;
                 color: #fff;
-                border-bottom-left-radius: 5px;
-                border-bottom-right-radius: 5px;
-            }
-
-            .body-content:before {
-                content: '';
-                position: absolute;
-                top: -30px;
-                left: -1px;
-                width: 100%;
-                height: 50px;
-                background: #2c3e50;
-                border-left: 1px solid #2c3e50;
-                border-right: 1px solid #2c3e50;
-                transform: skewY(5deg);
-                z-index: -1;
-                box-shadow: 0 -4px 5px rgba(0,0,0,0.4);
-            }
-
-            .body-content h3 {
+                border-radius: 5px;
+            }}
+            .body-content h3 {{
                 margin-bottom: 15px;
                 font-family: 'Roboto';
                 font-weight: 900;
                 font-size: 22px;
-            }
-
-            .round-btn {
+            }}
+            .round-btn {{
                 position: absolute;
                 bottom: 25px;
-                left: 40px!important;
+                left: 20px;
                 width: 60px;
                 height: 60px;
                 font-size: 22px;
@@ -335,37 +298,75 @@ def generate_index_html(blog_posts, output_dir):
                 text-align: center;
                 background: #fff;
                 color: #2c3e50;
-                -webkit-border-radius: 50%;
-                -moz-border-radius: 50%;
                 border-radius: 50%;
                 z-index: 1;
-                -webkit-transition: all .2s ease-in-out;
-                -o-transition: all .2s ease-in-out;
-                -moz-transition: all .2s ease-in-out;
                 transition: all .2s ease-in-out;
-                -webkit-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.0);
-                -moz-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.0);
                 box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.0);
-            }
-
-            .round-btn:hover {
-                -webkit-box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2), 0 0 0 20px rgba(255, 255, 255, 0.12);
-                -moz-box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2), 0 0 0 20px rgba(255, 255, 255, 0.12);
+            }}
+            .round-btn:hover {{
                 box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2), 0 0 0 20px rgba(255, 255, 255, 0.12);
-            }
+            }}
+            .navbar {{
+                background: #2c3e50;
+                padding: 10px 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }}
+            .navbar-brand {{
+                color: #fff;
+                font-size: 24px;
+                font-weight: 700;
+                text-decoration: none;
+            }}
+            .navbar-nav {{
+                display: flex;
+                gap: 20px;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }}
+            .nav-item {{
+                position: relative;
+            }}
+            .nav-link {{
+                color: #fff;
+                text-decoration: none;
+                font-size: 16px;
+                font-weight: 500;
+            }}
+            .dropdown-menu {{
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: #fff;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 5px;
+                padding: 10px 0;
+                z-index: 1000;
+            }}
+            .dropdown-item {{
+                color: #2c3e50;
+                text-decoration: none;
+                padding: 10px 20px;
+                display: block;
+            }}
+            .dropdown-item:hover {{
+                background: #f8f9fa;
+            }}
+            .nav-item:hover .dropdown-menu {{
+                display: block;
+            }}
         </style>
     </head>
     <body>
         {generate_navigation_menu(categories)}
-        <h1>Latest news</h1>
+        <h1>Latest News</h1>
         <div class="grid-container">
     """
-
-    # Add all blog posts to the grid
     for post in blog_posts:
-        # Generate the URL based on category and subcategory
         url = f"{post['category']}/{post['subcategory']}/{post['filename']}"
-        # Extract the first few lines of meaningful text
         preview = extract_preview(post['content'])
         index_content += f"""
             <div class="grid-col">
@@ -379,14 +380,11 @@ def generate_index_html(blog_posts, output_dir):
                 </div>
             </div>
         """
-
     index_content += """
         </div>
     </body>
     </html>
     """
-
-    # Save index.html with UTF-8 encoding
     filepath = os.path.join(output_dir, "index.html")
     try:
         with open(filepath, "w", encoding="utf-8") as file:
@@ -395,17 +393,394 @@ def generate_index_html(blog_posts, output_dir):
     except Exception as e:
         print(f"Error saving index.html: {e}")
 
+# Function to generate category pages
+def generate_category_pages(categories, output_dir):
+    for category, subcategories in categories.items():
+        category_dir = os.path.join(output_dir, category)
+        os.makedirs(category_dir, exist_ok=True)
+        category_content = f"""
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>{category.capitalize()} - GFreeLife</title>
+            <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <style>
+                body {{
+                    width: 100%;
+                    height: 100vh;
+                    font-family: 'Roboto';
+                    background: #fff;
+                    margin: 0;
+                    padding: 0;
+                }}
+                h1 {{
+                    font-size: 42px;
+                    font-weight: 900;
+                    margin: 50px 5%;
+                    text-transform: capitalize;
+                    position: relative;
+                }}
+                h1:after {{
+                    position: absolute;
+                    content: '';
+                    top: -10px;
+                    left: 0;
+                    width: 80px;
+                    height: 4px;
+                    background: #2c3e50;
+                }}
+                .grid-container {{
+                    width: 90%;
+                    margin: 0 auto;
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 20px;
+                }}
+                .grid-col {{
+                    flex: 1 1 calc(33.3% - 20px);
+                    min-width: 300px;
+                    box-sizing: border-box;
+                    margin-bottom: 20px;
+                }}
+                .grid-col .icon {{
+                    font-size: 48px;
+                    text-align: center;
+                    margin-bottom: 20px;
+                    color: #2c3e50;
+                }}
+                .body-content {{
+                    background: #2c3e50;
+                    padding: 20px;
+                    position: relative;
+                    border: 1px solid #2c3e50;
+                    border-top: none;
+                    z-index: 1;
+                    line-height: 23px;
+                    color: #fff;
+                    border-radius: 5px;
+                }}
+                .body-content h3 {{
+                    margin-bottom: 15px;
+                    font-family: 'Roboto';
+                    font-weight: 900;
+                    font-size: 22px;
+                }}
+                .round-btn {{
+                    position: absolute;
+                    bottom: 25px;
+                    left: 20px;
+                    width: 60px;
+                    height: 60px;
+                    font-size: 22px;
+                    line-height: 60px;
+                    text-align: center;
+                    background: #fff;
+                    color: #2c3e50;
+                    border-radius: 50%;
+                    z-index: 1;
+                    transition: all .2s ease-in-out;
+                    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.0);
+                }}
+                .round-btn:hover {{
+                    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2), 0 0 0 20px rgba(255, 255, 255, 0.12);
+                }}
+                .navbar {{
+                    background: #2c3e50;
+                    padding: 10px 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }}
+                .navbar-brand {{
+                    color: #fff;
+                    font-size: 24px;
+                    font-weight: 700;
+                    text-decoration: none;
+                }}
+                .navbar-nav {{
+                    display: flex;
+                    gap: 20px;
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                }}
+                .nav-item {{
+                    position: relative;
+                }}
+                .nav-link {{
+                    color: #fff;
+                    text-decoration: none;
+                    font-size: 16px;
+                    font-weight: 500;
+                }}
+                .dropdown-menu {{
+                    display: none;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    background: #fff;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    border-radius: 5px;
+                    padding: 10px 0;
+                    z-index: 1000;
+                }}
+                .dropdown-item {{
+                    color: #2c3e50;
+                    text-decoration: none;
+                    padding: 10px 20px;
+                    display: block;
+                }}
+                .dropdown-item:hover {{
+                    background: #f8f9fa;
+                }}
+                .nav-item:hover .dropdown-menu {{
+                    display: block;
+                }}
+            </style>
+        </head>
+        <body>
+            <nav class="navbar">
+                <a class="navbar-brand" href="https://gfreelife.com">GFreeLife</a>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/categories">Categories</a>
+                    </li>
+                </ul>
+            </nav>
+            <h1>{category.capitalize()}</h1>
+            <div class="grid-container">
+        """
+        for subcategory in subcategories:
+            category_content += f"""
+                <div class="grid-col">
+                    <div class="icon">
+                        <i class="fa fa-folder-open-o"></i>
+                    </div>
+                    <div class="body-content">
+                        <h3>{subcategory.capitalize()}</h3>
+                        <a href="/{category}/{subcategory}" class="round-btn"><i class="fa fa-long-arrow-right"></i></a>
+                    </div>
+                </div>
+            """
+        category_content += """
+            </div>
+        </body>
+        </html>
+        """
+        filepath = os.path.join(category_dir, "index.html")
+        try:
+            with open(filepath, "w", encoding="utf-8") as file:
+                file.write(category_content)
+            print(f"Generated: {filepath}")
+        except Exception as e:
+            print(f"Error saving category page {filepath}: {e}")
+
+# Function to generate subcategory pages
+def generate_subcategory_pages(categories, output_dir, blog_posts):
+    for category, subcategories in categories.items():
+        for subcategory in subcategories:
+            subcategory_dir = os.path.join(output_dir, category, subcategory)
+            os.makedirs(subcategory_dir, exist_ok=True)
+            subcategory_content = f"""
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>{subcategory.capitalize()} - {category.capitalize()} - GFreeLife</title>
+                <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                <style>
+                    body {{
+                        width: 100%;
+                        height: 100vh;
+                        font-family: 'Roboto';
+                        background: #fff;
+                        margin: 0;
+                        padding: 0;
+                    }}
+                    h1 {{
+                        font-size: 42px;
+                        font-weight: 900;
+                        margin: 50px 5%;
+                        text-transform: capitalize;
+                        position: relative;
+                    }}
+                    h1:after {{
+                        position: absolute;
+                        content: '';
+                        top: -10px;
+                        left: 0;
+                        width: 80px;
+                        height: 4px;
+                        background: #2c3e50;
+                    }}
+                    .grid-container {{
+                        width: 90%;
+                        margin: 0 auto;
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 20px;
+                    }}
+                    .grid-col {{
+                        flex: 1 1 calc(33.3% - 20px);
+                        min-width: 300px;
+                        box-sizing: border-box;
+                        margin-bottom: 20px;
+                    }}
+                    .grid-col .icon {{
+                        font-size: 48px;
+                        text-align: center;
+                        margin-bottom: 20px;
+                        color: #2c3e50;
+                    }}
+                    .body-content {{
+                        background: #2c3e50;
+                        padding: 20px;
+                        position: relative;
+                        border: 1px solid #2c3e50;
+                        border-top: none;
+                        z-index: 1;
+                        line-height: 23px;
+                        color: #fff;
+                        border-radius: 5px;
+                    }}
+                    .body-content h3 {{
+                        margin-bottom: 15px;
+                        font-family: 'Roboto';
+                        font-weight: 900;
+                        font-size: 22px;
+                    }}
+                    .round-btn {{
+                        position: absolute;
+                        bottom: 25px;
+                        left: 20px;
+                        width: 60px;
+                        height: 60px;
+                        font-size: 22px;
+                        line-height: 60px;
+                        text-align: center;
+                        background: #fff;
+                        color: #2c3e50;
+                        border-radius: 50%;
+                        z-index: 1;
+                        transition: all .2s ease-in-out;
+                        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.0);
+                    }}
+                    .round-btn:hover {{
+                        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2), 0 0 0 20px rgba(255, 255, 255, 0.12);
+                    }}
+                    .navbar {{
+                        background: #2c3e50;
+                        padding: 10px 20px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    }}
+                    .navbar-brand {{
+                        color: #fff;
+                        font-size: 24px;
+                        font-weight: 700;
+                        text-decoration: none;
+                    }}
+                    .navbar-nav {{
+                        display: flex;
+                        gap: 20px;
+                        list-style: none;
+                        margin: 0;
+                        padding: 0;
+                    }}
+                    .nav-item {{
+                        position: relative;
+                    }}
+                    .nav-link {{
+                        color: #fff;
+                        text-decoration: none;
+                        font-size: 16px;
+                        font-weight: 500;
+                    }}
+                    .dropdown-menu {{
+                        display: none;
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        background: #fff;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                        border-radius: 5px;
+                        padding: 10px 0;
+                        z-index: 1000;
+                    }}
+                    .dropdown-item {{
+                        color: #2c3e50;
+                        text-decoration: none;
+                        padding: 10px 20px;
+                        display: block;
+                    }}
+                    .dropdown-item:hover {{
+                        background: #f8f9fa;
+                    }}
+                    .nav-item:hover .dropdown-menu {{
+                        display: block;
+                    }}
+                </style>
+            </head>
+            <body>
+                <nav class="navbar">
+                    <a class="navbar-brand" href="https://gfreelife.com">GFreeLife</a>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/categories">Categories</a>
+                        </li>
+                    </ul>
+                </nav>
+                <h1>{subcategory.capitalize()}</h1>
+                <div class="grid-container">
+            """
+            subcategory_posts = [post for post in blog_posts if post['category'] == category and post['subcategory'] == subcategory]
+            for post in subcategory_posts:
+                url = f"{post['category']}/{post['subcategory']}/{post['filename']}"
+                preview = extract_preview(post['content'])
+                subcategory_content += f"""
+                    <div class="grid-col">
+                        <div class="icon">
+                            <i class="fa fa-file-text-o"></i>
+                        </div>
+                        <div class="body-content">
+                            <h3>{post['title']}</h3>
+                            <p>{preview}</p>
+                            <a href="{url}" class="round-btn"><i class="fa fa-long-arrow-right"></i></a>
+                        </div>
+                    </div>
+                """
+            subcategory_content += """
+                </div>
+            </body>
+            </html>
+            """
+            filepath = os.path.join(subcategory_dir, "index.html")
+            try:
+                with open(filepath, "w", encoding="utf-8") as file:
+                    file.write(subcategory_content)
+                print(f"Generated: {filepath}")
+            except Exception as e:
+                print(f"Error saving subcategory page {filepath}: {e}")
+
 # Function to push changes to GitHub
 def push_to_github():
     try:
-        # Add all files to Git
         subprocess.run(["git", "add", "."], check=True)
-        # Commit with a timestamp
         commit_message = f"Automated update: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
         subprocess.run(["git", "commit", "-m", commit_message], check=True)
-        # Pull remote changes first to avoid conflicts
         subprocess.run(["git", "pull", "origin", "main"], check=True)
-        # Push to the main branch
         subprocess.run(["git", "push", "origin", "main"], check=True)
         print("Changes pushed to GitHub.")
     except subprocess.CalledProcessError as e:
@@ -413,35 +788,20 @@ def push_to_github():
 
 # Main script
 if __name__ == "__main__":
-    # List of keywords or topics
-    keywords = [
-        "what is gluten free food?"
-    ]
-
-    # Output directory for blog posts
+    keywords = ["How to play football?"]
     output_dir = "docs"
     os.makedirs(output_dir, exist_ok=True)
-
-    # Add CNAME file for custom domain
     cname_filepath = os.path.join(output_dir, "CNAME")
     with open(cname_filepath, "w") as cname_file:
         cname_file.write("gfreelife.com")
-
-    # Track categories and subcategories
     categories = defaultdict(set)
-
-    # Scan existing posts in the docs folder
     existing_posts = scan_existing_posts(output_dir)
-
-    # Generate blog posts for each keyword
     blog_posts = []
     for keyword in keywords:
-        # Check if the post already exists
         post_exists = any(post["title"] == keyword for post in existing_posts)
         if not post_exists:
             post = generate_blog_post(keyword)
             if post:
-                # Determine the category and subcategory using DeepSeek API
                 category, subcategory = determine_category(keyword)
                 categories[category].add(subcategory)
                 blog_posts.append({
@@ -455,16 +815,10 @@ if __name__ == "__main__":
                 print(f"Failed to generate post for: {keyword}")
         else:
             print(f"Post already exists: {keyword}")
-
-    # Combine existing and new posts
     all_posts = existing_posts + blog_posts
-
-    # Generate individual HTML files for new posts
     for post in blog_posts:
         save_formatted_html(post, output_dir, post['category'], post['subcategory'])
-
-    # Generate index.html
-    generate_index_html(all_posts, output_dir)
-
-    # Push changes to GitHub
+    generate_index_html(all_posts, output_dir, categories)
+    generate_category_pages(categories, output_dir)
+    generate_subcategory_pages(categories, output_dir, all_posts)
     push_to_github()
