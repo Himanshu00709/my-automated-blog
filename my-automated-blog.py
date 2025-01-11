@@ -17,7 +17,7 @@ def sanitize_filename(filename):
     sanitized = re.sub(r'[<>:"/\\|?*]', '_', filename)  # Replace invalid characters
     sanitized = sanitized.replace(' ', '-')  # Replace spaces with hyphens
     sanitized = re.sub(r'[-_]+$', '', sanitized)  # Remove trailing hyphens/underscores
-    return sanitized.lower()
+    return sanitized.lower()[:50]  # Truncate to 50 characters to avoid long paths
 
 # Function to generate fully formatted HTML content using DeepSeek API
 def generate_formatted_html(prompt):
@@ -877,7 +877,16 @@ def push_to_github():
 # Main script
 if __name__ == "__main__":
     keywords = [
-        "acini de pepe gluten free"
+       "are geek bars gluten free",
+"are gummy sharks gluten free",
+"are peanut butter balls gluten free",
+"are popeyes mashed potatoes gluten free",
+"are seafood boils gluten free",
+"arizona hard gluten free",
+"arroz con gandules gluten free",
+"asahi beer gluten free",
+"astilbe glut",
+"atlantis glute machine"
     ]
     output_dir = "docs"
     os.makedirs(output_dir, exist_ok=True)
