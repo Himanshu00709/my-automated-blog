@@ -1,3 +1,4 @@
+import threading
 from openai import OpenAI
 import os
 import re
@@ -24,7 +25,7 @@ def generate_formatted_html(prompt):
         response = client.chat.completions.create(
             model="deepseek-chat",
             messages=[
-                {"role": "system", "content": "You are a helpful assistant that generates fully formatted HTML content for blog posts, including headlines, paragraphs, and basic styling. Return only the HTML code, nothing else. Make sure to add as many tables as you can and write 1000-word articles minimum. Write like a niche expert and doctor."},
+                {"role": "system", "content": "You are a helpful assistant that generates fully formatted HTML content for blog posts, including headlines, paragraphs, and basic styling. Return only the HTML code, nothing else. Make sure to add as many tables as you can and write 1000-word articles minimum. Write like a niche expert and doctor. write long paragraphs not fluffy content"},
                 {"role": "user", "content": prompt},
             ],
             stream=False
@@ -880,32 +881,48 @@ if __name__ == "__main__":
         categories[post['category']].add(post['subcategory'])
     
     blog_posts = []
+    threads = []
     for keyword in keywords:
         # Skip exact match keywords if they already exist
         post_exists = any(post["title"] == keyword for post in existing_posts)
         if not post_exists:
-            post = generate_blog_post(keyword)
-            if post:
-                category, subcategory = determine_category(keyword)
-                categories[category].add(subcategory)  # Add new category/subcategory if not already present
-                blog_posts.append({
-                    **post,
-                    "category": category,
-                    "subcategory": subcategory,
-                    "filename": sanitize_filename(f"{post['title']}.html")
-                })
-                print(f"Generated post: {post['title']} (Category: {category}/{subcategory})")
-            else:
-                print(f"Failed to generate post for: {keyword}")
+            # Generate blog post in a separate thread
+            thread = threading.Thread(target=lambda k=keyword: blog_posts.append(generate_blog_post(k)))
+            thread.start()
+            threads.append(thread)
         else:
             print(f"Post already exists: {keyword}")
+    
+    # Wait for all threads to complete
+    for thread in threads:
+        thread.join()
+    
+    # Determine categories for new posts
+    for post in blog_posts:
+        if post:
+            category, subcategory = determine_category(post['title'])
+            categories[category].add(subcategory)
+            post.update({
+                "category": category,
+                "subcategory": subcategory,
+                "filename": sanitize_filename(f"{post['title']}.html")
+            })
+            print(f"Generated post: {post['title']} (Category: {category}/{subcategory})")
     
     # Combine existing posts and new posts
     all_posts = existing_posts + blog_posts
     
-    # Save new posts
+    # Save new posts in separate threads
+    save_threads = []
     for post in blog_posts:
-        save_formatted_html(post, output_dir, post['category'], post['subcategory'])
+        if post:
+            thread = threading.Thread(target=save_formatted_html, args=(post, output_dir, post['category'], post['subcategory']))
+            thread.start()
+            save_threads.append(thread)
+    
+    # Wait for all save threads to complete
+    for thread in save_threads:
+        thread.join()
     
     # Generate index.html, category pages, and subcategory pages
     generate_index_html(all_posts, output_dir, categories)
