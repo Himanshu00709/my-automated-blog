@@ -134,6 +134,20 @@ def save_formatted_html(post, output_dir, category, subcategory):
                 margin-top: 20px;
                 font-size: 16px;
             }}
+            footer {{
+                background: #2c3e50;
+                color: #fff;
+                padding: 20px;
+                text-align: center;
+                margin-top: 40px;
+            }}
+            footer a {{
+                color: #3498db;
+                text-decoration: none;
+            }}
+            footer a:hover {{
+                text-decoration: underline;
+            }}
         </style>
     </head>
     <body>
@@ -141,6 +155,9 @@ def save_formatted_html(post, output_dir, category, subcategory):
             {post['content']}
             <a href="https://gfreelife.com" class="back-link">Back to Home</a>
         </div>
+        <footer>
+            <p>&copy; {datetime.now().year} GFreeLife. All rights reserved. | <a href="/">Home</a> | <a href="/categories">Categories</a></p>
+        </footer>
     </body>
     </html>
     """
@@ -358,6 +375,20 @@ def generate_index_html(blog_posts, output_dir, categories):
             .nav-item:hover .dropdown-menu {{
                 display: block;
             }}
+            footer {{
+                background: #2c3e50;
+                color: #fff;
+                padding: 20px;
+                text-align: center;
+                margin-top: 40px;
+            }}
+            footer a {{
+                color: #3498db;
+                text-decoration: none;
+            }}
+            footer a:hover {{
+                text-decoration: underline;
+            }}
         </style>
     </head>
     <body>
@@ -382,6 +413,9 @@ def generate_index_html(blog_posts, output_dir, categories):
         """
     index_content += """
         </div>
+        <footer>
+            <p>&copy; {datetime.now().year} GFreeLife. All rights reserved. | <a href="/">Home</a> | <a href="/categories">Categories</a></p>
+        </footer>
     </body>
     </html>
     """
@@ -539,6 +573,20 @@ def generate_category_pages(categories, output_dir):
                 .nav-item:hover .dropdown-menu {{
                     display: block;
                 }}
+                footer {{
+                    background: #2c3e50;
+                    color: #fff;
+                    padding: 20px;
+                    text-align: center;
+                    margin-top: 40px;
+                }}
+                footer a {{
+                    color: #3498db;
+                    text-decoration: none;
+                }}
+                footer a:hover {{
+                    text-decoration: underline;
+                }}
             </style>
         </head>
         <body>
@@ -570,6 +618,9 @@ def generate_category_pages(categories, output_dir):
             """
         category_content += """
             </div>
+            <footer>
+                <p>&copy; {datetime.now().year} GFreeLife. All rights reserved. | <a href="/">Home</a> | <a href="/categories">Categories</a></p>
+            </footer>
         </body>
         </html>
         """
@@ -728,6 +779,20 @@ def generate_subcategory_pages(categories, output_dir, blog_posts):
                     .nav-item:hover .dropdown-menu {{
                         display: block;
                     }}
+                    footer {{
+                        background: #2c3e50;
+                        color: #fff;
+                        padding: 20px;
+                        text-align: center;
+                        margin-top: 40px;
+                    }}
+                    footer a {{
+                        color: #3498db;
+                        text-decoration: none;
+                    }}
+                    footer a:hover {{
+                        text-decoration: underline;
+                    }}
                 </style>
             </head>
             <body>
@@ -763,6 +828,9 @@ def generate_subcategory_pages(categories, output_dir, blog_posts):
                 """
             subcategory_content += """
                 </div>
+                <footer>
+                    <p>&copy; {datetime.now().year} GFreeLife. All rights reserved. | <a href="/">Home</a> | <a href="/categories">Categories</a></p>
+                </footer>
             </body>
             </html>
             """
@@ -789,7 +857,7 @@ def push_to_github():
 # Main script
 if __name__ == "__main__":
     keywords = [
-        "Which game is No. 1?"
+        "How to make a game?"
     ]
     output_dir = "docs"
     os.makedirs(output_dir, exist_ok=True)
