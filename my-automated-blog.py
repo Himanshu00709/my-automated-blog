@@ -609,7 +609,7 @@ def generate_category_pages(categories, output_dir):
         category_content += """
             </div>
             <footer>
-                <p>&copy; {datetime.now().year} GFreeLife. All rights reserved. | <a href="/">Home</a> | <a href="/categories">Categories</a></p>
+                <p>&copy; 2025 GFreeLife. All rights reserved. | <a href="/">Home</a> | <a href="/categories">Categories</a></p>
             </footer>
         </body>
         </html>
