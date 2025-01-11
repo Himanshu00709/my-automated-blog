@@ -788,7 +788,7 @@ def push_to_github():
 
 # Main script
 if __name__ == "__main__":
-    keywords = ["what is investment banking?"]
+    keywords = ["what is crypto currency?"]
     output_dir = "docs"
     os.makedirs(output_dir, exist_ok=True)
     cname_filepath = os.path.join(output_dir, "CNAME")
