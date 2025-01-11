@@ -286,7 +286,7 @@ def push_to_github():
 if __name__ == "__main__":
     # List of keywords or topics
     keywords = [
-        "How to Defrost a Burger Patty?"
+        "How to code in c++"
     ]
 
     # Generate blog posts for each keyword
