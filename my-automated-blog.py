@@ -4,6 +4,7 @@ import re
 import subprocess
 from datetime import datetime
 from collections import defaultdict
+import xml.etree.ElementTree as ET
 
 # Initialize the OpenAI client with DeepSeek API
 api_key = "sk-fe730eb5b82c40478fa6411e9f09bf1c"  # Replace with your DeepSeek API key
@@ -215,7 +216,7 @@ def generate_navigation_menu(categories):
     </nav>
     """
 
-# Function to generate index.html with the new design
+# Function to generate index.html without "Latest News"
 def generate_index_html(blog_posts, output_dir, categories):
     index_content = f"""
     <!DOCTYPE html>
@@ -376,7 +377,6 @@ def generate_index_html(blog_posts, output_dir, categories):
     </head>
     <body>
         {generate_navigation_menu(categories)}
-        <h1>Latest News</h1>
         <div class="grid-container">
     """
     for post in blog_posts:
@@ -808,6 +808,40 @@ def generate_subcategory_pages(categories, output_dir, blog_posts):
             except Exception as e:
                 print(f"Error saving subcategory page {filepath}: {e}")
 
+# Function to generate sitemap.xml
+def generate_sitemap(output_dir, blog_posts):
+    urlset = ET.Element("urlset", xmlns="http://www.sitemaps.org/schemas/sitemap/0.9")
+    base_url = "https://gfreelife.com"
+
+    # Add homepage
+    url = ET.SubElement(urlset, "url")
+    ET.SubElement(url, "loc").text = base_url
+    ET.SubElement(url, "lastmod").text = datetime.now().strftime("%Y-%m-%d")
+
+    # Add blog posts
+    for post in blog_posts:
+        url = ET.SubElement(urlset, "url")
+        ET.SubElement(url, "loc").text = f"{base_url}/{post['category']}/{post['subcategory']}/{post['filename']}"
+        ET.SubElement(url, "lastmod").text = datetime.now().strftime("%Y-%m-%d")
+
+    # Write to file
+    tree = ET.ElementTree(urlset)
+    sitemap_path = os.path.join(output_dir, "sitemap.xml")
+    tree.write(sitemap_path, encoding="utf-8", xml_declaration=True)
+    print(f"Generated: {sitemap_path}")
+
+# Function to generate robots.txt
+def generate_robots_txt(output_dir):
+    robots_content = """
+User-agent: *
+Allow: /
+Sitemap: https://gfreelife.com/sitemap.xml
+    """
+    robots_path = os.path.join(output_dir, "robots.txt")
+    with open(robots_path, "w", encoding="utf-8") as file:
+        file.write(robots_content)
+    print(f"Generated: {robots_path}")
+
 # Function to push changes to GitHub
 def push_to_github():
     try:
@@ -871,6 +905,10 @@ if __name__ == "__main__":
     generate_index_html(all_posts, output_dir, categories)
     generate_category_pages(categories, output_dir)
     generate_subcategory_pages(categories, output_dir, all_posts)
+    
+    # Generate sitemap.xml and robots.txt
+    generate_sitemap(output_dir, all_posts)
+    generate_robots_txt(output_dir)
     
     # Push changes to GitHub
     push_to_github()
