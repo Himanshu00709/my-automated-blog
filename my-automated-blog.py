@@ -10,12 +10,15 @@ base_url = "https://api.deepseek.com"  # DeepSeek base URL
 
 client = OpenAI(api_key=api_key, base_url=base_url)
 
-# Function to sanitize filenames and replace underscores with hyphens
+# Function to sanitize filenames and replace spaces with hyphens
 def sanitize_filename(filename):
-    # Replace special characters with underscores and then replace underscores with hyphens
+    # Replace special characters with underscores
     sanitized = re.sub(r'[<>:"/\\|?*]', '_', filename)
-    sanitized = sanitized.replace('_', '-')
-    return sanitized
+    # Replace spaces with hyphens
+    sanitized = sanitized.replace(' ', '-')
+    # Remove any trailing hyphens or underscores
+    sanitized = re.sub(r'[-_]+$', '', sanitized)
+    return sanitized.lower()  # Convert to lowercase for consistency
 
 # Function to generate fully formatted HTML content using DeepSeek API
 def generate_formatted_html(prompt):
@@ -120,8 +123,8 @@ def save_formatted_html(post, output_dir):
     </html>
     """
 
-    # Sanitize the filename and replace underscores with hyphens
-    filename = sanitize_filename(f"{post['title'].lower()}.html")
+    # Sanitize the filename and replace spaces with hyphens
+    filename = sanitize_filename(f"{post['title']}.html")
     filepath = os.path.join(output_dir, filename)
     try:
         with open(filepath, "w", encoding="utf-8") as file:
@@ -296,7 +299,7 @@ def generate_index_html(blog_posts, output_dir):
     # Add all blog posts to the grid
     for post in blog_posts:
         # Sanitize the filename
-        filename = post.get("filename", sanitize_filename(f"{post['title'].lower()}.html"))
+        filename = post.get("filename", sanitize_filename(f"{post['title']}.html"))
         # Extract the first few lines of meaningful text
         preview = extract_preview(post['content'])
         index_content += f"""
@@ -347,7 +350,7 @@ def push_to_github():
 if __name__ == "__main__":
     # List of keywords or topics
     keywords = [
-        "How to make a cake?"
+        "12 inch gluten free wraps"
     ]
 
     # Output directory for blog posts
