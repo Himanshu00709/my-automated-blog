@@ -158,7 +158,7 @@ def scan_existing_posts(output_dir):
                 print(f"Error reading file {filename}: {e}")
     return existing_posts
 
-# Function to generate index.html with a grid layout (4 posts per row)
+# Function to generate index.html with the new design
 def generate_index_html(blog_posts, output_dir):
     index_content = """
     <!DOCTYPE html>
@@ -167,90 +167,127 @@ def generate_index_html(blog_posts, output_dir):
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>My Automated Blog</title>
-        <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <style>
+            $midnight: #2c3e50;
+
             body {
-                margin: 0;
-                padding: 0;
-                background: hsl(47, 88%, 63%);
-                font-family: "Figtree", sans-serif;
-            }
-            .container {
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 20px;
-            }
-            h1 {
-                color: #2c3e50;
-                text-align: center;
-                margin-bottom: 40px;
-            }
-            .grid {
-                display: grid;
-                grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
-                gap: 20px;
-            }
-            .card {
-                background: hsl(0, 0%, 100%);
-                padding: 1.2em;
-                border: solid 1px hsl(0, 0%, 7%);
-                border-radius: 20px;
-                box-shadow: 12px 12px 10px -6px rgba(0,0,0,1);
-                cursor: pointer;
-                transition: transform 0.2s, box-shadow 0.2s;
-            }
-            .card:hover {
-                transform: translateY(-5px);
-                box-shadow: 15px 15px 10px -6px rgba(0,0,0,1);
-            }
-            .img-head img {
                 width: 100%;
-                border-radius: 10px;
+                height: 100vh;
+                font-family: 'Roboto';
+                background: #fff;
             }
-            .card button {
-                background: hsl(47, 88%, 63%);
-                border: 0px solid;
-                font-weight: 800;
-                padding: 0.5em 1em 0.5em 1em;
-                border-radius: 5px;
-                margin-top: 1.5em;
-                cursor: pointer;
+
+            h1 {
+                font-size: 42px;
+                font-weight: 900;
+                margin: 50px 5%;
+                text-transform: capitalize;
+                position: relative;
             }
-            .published {
-                font-weight: 500;
-                font-size: 0.8em;
-                margin-top: 1em;
+
+            h1:after {
+                position: absolute;
+                content: '';
+                top: -10px;
+                left: 0;
+                width: 80px;
+                height: 4px;
+                background: $midnight;
             }
-            .card h1 {
-                font-size: 1.5em;
-                font-weight: 800;
-                margin-top: 1em;
+
+            .grid-container {
+                width: 90%;
+                margin: 0 auto;
             }
-            .descr {
-                color: hsl(0, 0%, 42%);
-                font-weight: 500;
-                margin-top: 1em;
+
+            .grid-col {
+                width: 33.3%;
+                min-width: 300px;
+                box-sizing: border-box;
+                padding-right: 20px;
+                margin-bottom: 20px;
+                float: left;
             }
-            .author {
-                display: flex;
-                align-items: center;
-                margin-top: 1.5em;
+
+            .grid-col img {
+                width: 100%;
+                height: auto;
+                max-height: 250px;
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
             }
-            .author img {
-                width: 3em;
+
+            .body-content {
+                background: $midnight;
+                padding: 0 30px 120px 40px;
+                position: relative;
+                border: 1px solid $midnight;
+                border-top: none;
+                z-index: 1;
+                line-height: 23px;
+                color: #fff;
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
+            }
+
+            .body-content:before {
+                content: '';
+                position: absolute;
+                top: -30px;
+                left: -1px;
+                width: 100%;
+                height: 50px;
+                background: $midnight;
+                border-left: 1px solid $midnight;
+                border-right: 1px solid $midnight;
+                transform: skewY(5deg);
+                z-index: -1;
+                box-shadow: 0 -4px 5px rgba(0,0,0,0.4);
+            }
+
+            .body-content h3 {
+                margin-bottom: 15px;
+                font-family: 'Roboto';
+                font-weight: 900;
+                font-size: 22px;
+            }
+
+            .round-btn {
+                position: absolute;
+                bottom: 25px;
+                left: 40px!important;
+                width: 60px;
+                height: 60px;
+                font-size: 22px;
+                line-height: 60px;
+                text-align: center;
+                background: #fff;
+                color: $midnight;
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
                 border-radius: 50%;
+                z-index: 1;
+                -webkit-transition: all .2s ease-in-out;
+                -o-transition: all .2s ease-in-out;
+                -moz-transition: all .2s ease-in-out;
+                transition: all .2s ease-in-out;
+                -webkit-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.0);
+                -moz-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.0);
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.0);
             }
-            .author h6 {
-                margin-left: 1em;
-                font-size: 1em;
-                font-weight: 800;
+
+            .round-btn:hover {
+                -webkit-box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2), 0 0 0 20px rgba(255, 255, 255, 0.12);
+                -moz-box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2), 0 0 0 20px rgba(255, 255, 255, 0.12);
+                box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2), 0 0 0 20px rgba(255, 255, 255, 0.12);
             }
         </style>
     </head>
     <body>
-        <div class="container">
-            <h1>Welcome to My Automated Blog</h1>
-            <div class="grid">
+        <h1>Latest news</h1>
+        <div class="grid-container">
     """
 
     # Add all blog posts to the grid
@@ -260,23 +297,17 @@ def generate_index_html(blog_posts, output_dir):
         # Extract the first few lines of meaningful text
         preview = extract_preview(post['content'])
         index_content += f"""
-                <div class="card" onclick="window.location.href='{filename}'">
-                    <div class="img-head">
-                        <img src="https://natyari.com/frontendmentor/blog-preview-card/assets/images/illustration-article.svg" alt="Header Image">
-                    </div>
-                    <button>Learning</button>
-                    <p class="published">Published 21 Dec 2023</p>
-                    <h1>{post['title']}</h1>
-                    <p class="descr">{preview}</p>
-                    <div class="author">
-                        <img src="https://natyari.com/frontendmentor/blog-preview-card/assets/images/image-avatar.webp" alt="Author">
-                        <h6>Greg Hooper</h6>
-                    </div>
+            <div class="grid-col">
+                <img src="https://images.pexels.com/photos/442542/pexels-photo-442542.jpeg?w=940&h=650&auto=compress&cs=tinysrgb" alt="">
+                <div class="body-content">
+                    <h3>{post['title']}</h3>
+                    <p>{preview}</p>
+                    <a href="{filename}" class="round-btn"><i class="fa fa-long-arrow-right"></i></a>
                 </div>
+            </div>
         """
 
     index_content += """
-            </div>
         </div>
     </body>
     </html>
@@ -309,7 +340,7 @@ def push_to_github():
 if __name__ == "__main__":
     # List of keywords or topics
     keywords = [
-        "How to design in autocad?"
+        "How to grow a plant?"
     ]
 
     # Output directory for blog posts
