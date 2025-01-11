@@ -136,7 +136,7 @@ def extract_preview(html_content):
     # Return the first 200 characters (or less) as a preview
     return plain_text[:200] + "..."
 
-# Function to generate index.html with a grid layout
+# Function to generate index.html with a grid layout (4 posts per row)
 def generate_index_html(blog_posts, output_dir):
     index_content = """
     <!DOCTYPE html>
@@ -165,7 +165,7 @@ def generate_index_html(blog_posts, output_dir):
             }
             .grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
                 gap: 20px;
             }
             .card {
@@ -286,7 +286,7 @@ def push_to_github():
 if __name__ == "__main__":
     # List of keywords or topics
     keywords = [
-        "How to code in c++"
+        "How to make a origami elephant?"
     ]
 
     # Generate blog posts for each keyword
