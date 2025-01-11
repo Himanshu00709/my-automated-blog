@@ -13,6 +13,8 @@
                 height: 100vh;
                 font-family: 'Roboto';
                 background: #fff;
+                margin: 0;
+                padding: 0;
             }
 
             h1 {
@@ -21,6 +23,7 @@
                 margin: 50px 5%;
                 text-transform: capitalize;
                 position: relative;
+                color: #2c3e50;
             }
 
             h1:after {
@@ -36,6 +39,7 @@
             .grid-container {
                 width: 90%;
                 margin: 0 auto;
+                padding-bottom: 40px; /* Space between rows */
             }
 
             .grid-col {
@@ -43,7 +47,7 @@
                 min-width: 300px;
                 box-sizing: border-box;
                 padding-right: 20px;
-                margin-bottom: 20px;
+                margin-bottom: 40px; /* Space between cards */
                 float: left;
             }
 
@@ -56,30 +60,11 @@
 
             .body-content {
                 background: #2c3e50;
-                padding: 0 30px 120px 40px;
+                padding: 20px;
                 position: relative;
-                border: 1px solid #2c3e50;
-                border-top: none;
-                z-index: 1;
-                line-height: 23px;
-                color: #fff;
-                border-bottom-left-radius: 5px;
-                border-bottom-right-radius: 5px;
-            }
-
-            .body-content:before {
-                content: '';
-                position: absolute;
-                top: -30px;
-                left: -1px;
-                width: 100%;
-                height: 50px;
-                background: #2c3e50;
-                border-left: 1px solid #2c3e50;
-                border-right: 1px solid #2c3e50;
-                transform: skewY(5deg);
-                z-index: -1;
-                box-shadow: 0 -4px 5px rgba(0,0,0,0.4);
+                border-radius: 10px;
+                color: white;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             }
 
             .body-content h3 {
@@ -87,12 +72,17 @@
                 font-family: 'Roboto';
                 font-weight: 900;
                 font-size: 22px;
+                color: white;
+            }
+
+            .body-content p {
+                color: #ecf0f1; /* Light gray for preview text */
             }
 
             .round-btn {
                 position: absolute;
                 bottom: 25px;
-                left: 40px!important;
+                left: 20px;
                 width: 60px;
                 height: 60px;
                 font-size: 22px;
@@ -100,22 +90,13 @@
                 text-align: center;
                 background: #fff;
                 color: #2c3e50;
-                -webkit-border-radius: 50%;
-                -moz-border-radius: 50%;
                 border-radius: 50%;
                 z-index: 1;
-                -webkit-transition: all .2s ease-in-out;
-                -o-transition: all .2s ease-in-out;
-                -moz-transition: all .2s ease-in-out;
-                transition: all .2s ease-in-out;
-                -webkit-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.0);
-                -moz-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.0);
+                transition: all 0.2s ease-in-out;
                 box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.0);
             }
 
             .round-btn:hover {
-                -webkit-box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2), 0 0 0 20px rgba(255, 255, 255, 0.12);
-                -moz-box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2), 0 0 0 20px rgba(255, 255, 255, 0.12);
                 box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.2), 0 0 0 20px rgba(255, 255, 255, 0.12);
             }
         </style>
@@ -124,6 +105,17 @@
         <h1>Latest news</h1>
         <div class="grid-container">
     
+            <div class="grid-col">
+                <div class="icon">
+                    <i class="fa fa-file-text-o"></i>
+                </div>
+                <div class="body-content">
+                    <h3>How to buy a shoe?</h3>
+                    <p>How to buy a shoe? body { margin: 0; padding: 0; background: hsl(47, 88%, 63%); font-family: "Figtree", sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; } .c...</p>
+                    <a href="how_to_buy_a_shoe_.html" class="round-btn"><i class="fa fa-long-arrow-right"></i></a>
+                </div>
+            </div>
+        
             <div class="grid-col">
                 <div class="icon">
                     <i class="fa fa-file-text-o"></i>
@@ -228,9 +220,9 @@
                     <i class="fa fa-file-text-o"></i>
                 </div>
                 <div class="body-content">
-                    <h3>How to buy a shoe?</h3>
-                    <p>```html How to Buy a Shoe - A Comprehensive Guide body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; } h1, h2 { color: #333; } p { color: #555; } table { width: 100%; border-collap...</p>
-                    <a href="how_to_buy_a_shoe_.html" class="round-btn"><i class="fa fa-long-arrow-right"></i></a>
+                    <h3>who is elon musk? </h3>
+                    <p>```html Who is Elon Musk? body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; } h1, h2 { color: #333; } p { color: #555; } table { width: 100%; border-collapse: collapse; margin: 20...</p>
+                    <a href="who_is_elon_musk__.html" class="round-btn"><i class="fa fa-long-arrow-right"></i></a>
                 </div>
             </div>
         
