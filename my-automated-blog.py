@@ -23,7 +23,7 @@ def generate_formatted_html(prompt):
         response = client.chat.completions.create(
             model="deepseek-chat",
             messages=[
-                {"role": "system", "content": "You are a helpful assistant that generates fully formatted HTML content for blog posts, including headlines, paragraphs, and basic styling. Return only the HTML code, nothing else. make sure to add as much tables as you can and write 1000 words articles minimum"},
+                {"role": "system", "content": "You are a helpful assistant that generates fully formatted HTML content for blog posts, including headlines, paragraphs, and basic styling. Return only the HTML code, nothing else. Make sure to add as many tables as you can and write 1000-word articles minimum."},
                 {"role": "user", "content": prompt},
             ],
             stream=False
@@ -788,14 +788,21 @@ def push_to_github():
 
 # Main script
 if __name__ == "__main__":
-    keywords = ["what is crypto currency?"]
+    keywords = ["what is bitcoin?"]
     output_dir = "docs"
     os.makedirs(output_dir, exist_ok=True)
     cname_filepath = os.path.join(output_dir, "CNAME")
     with open(cname_filepath, "w") as cname_file:
         cname_file.write("gfreelife.com")
+    
+    # Initialize categories with existing posts
     categories = defaultdict(set)
     existing_posts = scan_existing_posts(output_dir)
+    
+    # Populate categories with existing posts' categories and subcategories
+    for post in existing_posts:
+        categories[post['category']].add(post['subcategory'])
+    
     blog_posts = []
     for keyword in keywords:
         post_exists = any(post["title"] == keyword for post in existing_posts)
@@ -803,7 +810,7 @@ if __name__ == "__main__":
             post = generate_blog_post(keyword)
             if post:
                 category, subcategory = determine_category(keyword)
-                categories[category].add(subcategory)
+                categories[category].add(subcategory)  # Add new category/subcategory if not already present
                 blog_posts.append({
                     **post,
                     "category": category,
@@ -815,10 +822,18 @@ if __name__ == "__main__":
                 print(f"Failed to generate post for: {keyword}")
         else:
             print(f"Post already exists: {keyword}")
+    
+    # Combine existing posts and new posts
     all_posts = existing_posts + blog_posts
+    
+    # Save new posts
     for post in blog_posts:
         save_formatted_html(post, output_dir, post['category'], post['subcategory'])
+    
+    # Generate index.html, category pages, and subcategory pages
     generate_index_html(all_posts, output_dir, categories)
     generate_category_pages(categories, output_dir)
     generate_subcategory_pages(categories, output_dir, all_posts)
+    
+    # Push changes to GitHub
     push_to_github()
