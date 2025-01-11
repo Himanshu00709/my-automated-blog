@@ -788,7 +788,10 @@ def push_to_github():
 
 # Main script
 if __name__ == "__main__":
-    keywords = ["what is bitcoin?"]
+    keywords = ["What is the story of Pearl Harbor?",
+"What was the main reason for Pearl Harbor?",
+"Is Pearl Harbor based on a true story?"
+]
     output_dir = "docs"
     os.makedirs(output_dir, exist_ok=True)
     cname_filepath = os.path.join(output_dir, "CNAME")
