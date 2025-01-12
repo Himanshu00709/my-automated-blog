@@ -1,0 +1,236 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>gluten free chicken pot pie with red lobster biscuits</title>
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background: hsl(210, 29%, 24%);
+                font-family: "Figtree", sans-serif;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+            }
+            .container {
+                background: hsl(0, 0%, 100%);
+                max-width: 800px;
+                margin: 20px;
+                padding: 20px;
+                border: solid 1px hsl(0, 0%, 7%);
+                border-radius: 20px;
+                box-shadow: 12px 12px 10px -6px rgba(0,0,0,1);
+            }
+            h1 {
+                color: #2c3e50;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            h2 {
+                color: #34495e;
+                margin-top: 30px;
+                margin-bottom: 15px;
+            }
+            p {
+                color: #666;
+                margin-bottom: 20px;
+            }
+            a {
+                color: #3498db;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            .back-link {
+                display: inline-block;
+                margin-top: 20px;
+                font-size: 16px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            ```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gluten-Free Chicken Pot Pie with Red Lobster Biscuits</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 0;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        p {
+            color: #555;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .faq {
+            margin-top: 30px;
+        }
+        .faq h3 {
+            margin-bottom: 10px;
+        }
+        .faq p {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gluten-Free Chicken Pot Pie with Red Lobster Biscuits</h1>
+    <p>When it comes to comfort food, few dishes can rival the classic chicken pot pie. But for those who follow a gluten-free diet, enjoying this hearty dish can be a challenge. Enter the gluten-free chicken pot pie, a delicious and satisfying alternative that doesn’t compromise on flavor. Paired with the iconic Red Lobster biscuits, this meal is a game-changer for anyone looking to indulge in comfort food without the gluten. In this blog post, we’ll explore how to make a gluten-free chicken pot pie from scratch, along with a recipe for gluten-free Red Lobster biscuits that will leave you craving more.</p>
+
+    <h2>Why Go Gluten-Free?</h2>
+    <p>Gluten-free diets have gained popularity in recent years, not just among those with celiac disease or gluten sensitivity, but also among individuals looking to improve their overall health. Gluten, a protein found in wheat, barley, and rye, can cause digestive issues and inflammation in some people. By opting for gluten-free alternatives, you can enjoy your favorite dishes without the discomfort. Plus, gluten-free cooking has come a long way, with many recipes now offering the same taste and texture as their gluten-containing counterparts.</p>
+
+    <h2>Ingredients for Gluten-Free Chicken Pot Pie</h2>
+    <p>Before we dive into the recipe, let’s take a look at the ingredients you’ll need to make a gluten-free chicken pot pie. The key to a successful gluten-free dish is using high-quality, gluten-free ingredients. Here’s what you’ll need:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Ingredient</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Gluten-free flour blend</td>
+                <td>1 1/2 cups</td>
+            </tr>
+            <tr>
+                <td>Unsalted butter</td>
+                <td>1/2 cup</td>
+            </tr>
+            <tr>
+                <td>Chicken broth</td>
+                <td>2 cups</td>
+            </tr>
+            <tr>
+                <td>Milk (or dairy-free alternative)</td>
+                <td>1 cup</td>
+            </tr>
+            <tr>
+                <td>Cooked chicken (shredded)</td>
+                <td>2 cups</td>
+            </tr>
+            <tr>
+                <td>Mixed vegetables (carrots, peas, corn)</td>
+                <td>2 cups</td>
+            </tr>
+            <tr>
+                <td>Salt and pepper</td>
+                <td>To taste</td>
+            </tr>
+            <tr>
+                <td>Gluten-free pie crust</td>
+                <td>1 package</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Step-by-Step Instructions</h2>
+    <p>Now that you have all your ingredients ready, let’s get cooking! Follow these step-by-step instructions to create a delicious gluten-free chicken pot pie:</p>
+
+    <h3>Step 1: Prepare the Filling</h3>
+    <p>In a large skillet, melt the butter over medium heat. Add the gluten-free flour blend and whisk until smooth. Gradually add the chicken broth and milk, stirring constantly until the mixture thickens. Add the shredded chicken and mixed vegetables, and season with salt and pepper. Cook for another 5-7 minutes, until the vegetables are tender.</p>
+
+    <h3>Step 2: Assemble the Pie</h3>
+    <p>Preheat your oven to 375°F (190°C). Roll out the gluten-free pie crust and place it into a pie dish. Pour the chicken and vegetable mixture into the crust. Cover with the top crust, sealing the edges with a fork. Cut a few slits in the top crust to allow steam to escape.</p>
+
+    <h3>Step 3: Bake the Pie</h3>
+    <p>Place the pie in the preheated oven and bake for 30-35 minutes, or until the crust is golden brown and the filling is bubbling. Remove from the oven and let it cool for a few minutes before serving.</p>
+
+    <h2>Gluten-Free Red Lobster Biscuits</h2>
+    <p>No chicken pot pie is complete without a side of biscuits, and Red Lobster’s famous Cheddar Bay Biscuits are a fan favorite. Here’s how to make a gluten-free version of these cheesy, buttery delights:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Ingredient</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Gluten-free baking mix</td>
+                <td>2 cups</td>
+            </tr>
+            <tr>
+                <td>Shredded cheddar cheese</td>
+                <td>1 cup</td>
+            </tr>
+            <tr>
+                <td>Garlic powder</td>
+                <td>1/2 tsp</td>
+            </tr>
+            <tr>
+                <td>Butter (melted)</td>
+                <td>1/2 cup</td>
+            </tr>
+            <tr>
+                <td>Milk (or dairy-free alternative)</td>
+                <td>2/3 cup</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Step 1: Mix the Ingredients</h3>
+    <p>In a large bowl, combine the gluten-free baking mix, shredded cheddar cheese, and garlic powder. Add the melted butter and milk, and stir until a soft dough forms.</p>
+
+    <h3>Step 2: Form the Biscuits</h3>
+    <p>Drop spoonfuls of the dough onto a baking sheet lined with parchment paper. Bake in a preheated oven at 375°F (190°C) for 10-12 minutes, or until the biscuits are golden brown.</p>
+
+    <h3>Step 3: Brush with Butter</h3>
+    <p>While the biscuits are still warm, brush them with additional melted butter and sprinkle with a little extra garlic powder for that signature Red Lobster flavor.</p>
+
+    <h2>FAQs</h2>
+    <div class="faq">
+        <h3>Can I use a different type of flour for the pot pie?</h3>
+        <p>Yes, you can use any gluten-free flour blend that you prefer. Just make sure it’s a 1:1 substitute for regular flour to ensure the right consistency.</p>
+
+        <h3>Can I make the biscuits ahead of time?</h3>
+        <p>Absolutely! You can prepare the biscuit dough ahead of time and store it in the refrigerator for up to 24 hours before baking. This makes it easy to have fresh, warm biscuits ready to serve with your pot pie.</p>
+
+        <h3>Can I freeze the pot pie?</h3>
+        <p>Yes, you can freeze the pot pie either before or after baking. If freezing before baking, simply assemble the pie, wrap it tightly in plastic wrap and foil, and freeze. When ready to bake, you can cook it directly from frozen, adding extra time as needed.</p>
+    </div>
+
+    <h2>Conclusion</h2>
+    <p>Gluten-free cooking doesn’t have to be complicated or bland. With the right ingredients and techniques, you can create delicious, comforting meals that everyone will love. This gluten-free chicken pot pie paired with Red Lobster biscuits is the perfect example of how you can enjoy classic comfort food without the gluten. Whether you’re cooking for yourself or for a crowd, this recipe is sure to be a hit. So, roll up your sleeves, gather your ingredients, and get ready to enjoy a meal that’s both satisfying and gluten-free!</p>
+
+</body>
+</html>
+```
+            <a href="/" class="back-link">Back to Home</a>
+        </div>
+    </body>
+    </html>
+    

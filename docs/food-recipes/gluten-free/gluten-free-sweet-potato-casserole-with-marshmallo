@@ -1,0 +1,247 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>gluten free sweet potato casserole with marshmallow</title>
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background: hsl(210, 29%, 24%);
+                font-family: "Figtree", sans-serif;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+            }
+            .container {
+                background: hsl(0, 0%, 100%);
+                max-width: 800px;
+                margin: 20px;
+                padding: 20px;
+                border: solid 1px hsl(0, 0%, 7%);
+                border-radius: 20px;
+                box-shadow: 12px 12px 10px -6px rgba(0,0,0,1);
+            }
+            h1 {
+                color: #2c3e50;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            h2 {
+                color: #34495e;
+                margin-top: 30px;
+                margin-bottom: 15px;
+            }
+            p {
+                color: #666;
+                margin-bottom: 20px;
+            }
+            a {
+                color: #3498db;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            .back-link {
+                display: inline-block;
+                margin-top: 20px;
+                font-size: 16px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            ```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gluten-Free Sweet Potato Casserole with Marshmallow</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        p {
+            color: #555;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .faq {
+            margin-top: 30px;
+        }
+        .faq h3 {
+            margin-bottom: 10px;
+        }
+        .faq p {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gluten-Free Sweet Potato Casserole with Marshmallow: A Holiday Favorite</h1>
+    <p>When it comes to holiday meals, few dishes evoke as much nostalgia and comfort as sweet potato casserole. This classic dish, with its creamy sweet potato base and gooey marshmallow topping, is a staple on many Thanksgiving and Christmas tables. But for those who follow a gluten-free diet, finding a version of this dish that fits their dietary needs can be a challenge. That’s where this gluten-free sweet potato casserole with marshmallow comes in. Not only is it delicious, but it’s also easy to make and perfect for sharing with family and friends.</p>
+
+    <h2>Why Choose a Gluten-Free Sweet Potato Casserole?</h2>
+    <p>Gluten-free diets have become increasingly popular, whether due to celiac disease, gluten sensitivity, or personal preference. Traditional sweet potato casseroles often contain gluten in the form of flour or breadcrumbs, which are used as thickeners or toppings. By making a gluten-free version, you can ensure that everyone at your table can enjoy this beloved dish without worry. Plus, sweet potatoes are naturally gluten-free, making them an excellent base for this recipe.</p>
+
+    <h2>Ingredients You’ll Need</h2>
+    <p>To make this gluten-free sweet potato casserole with marshmallow, you’ll need the following ingredients:</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Ingredient</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Sweet potatoes</td>
+                <td>4 large (about 3 pounds)</td>
+            </tr>
+            <tr>
+                <td>Unsalted butter</td>
+                <td>1/2 cup (1 stick)</td>
+            </tr>
+            <tr>
+                <td>Brown sugar</td>
+                <td>1/2 cup</td>
+            </tr>
+            <tr>
+                <td>Milk (or dairy-free alternative)</td>
+                <td>1/2 cup</td>
+            </tr>
+            <tr>
+                <td>Vanilla extract</td>
+                <td>1 teaspoon</td>
+            </tr>
+            <tr>
+                <td>Ground cinnamon</td>
+                <td>1 teaspoon</td>
+            </tr>
+            <tr>
+                <td>Salt</td>
+                <td>1/2 teaspoon</td>
+            </tr>
+            <tr>
+                <td>Mini marshmallows</td>
+                <td>2 cups</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Step-by-Step Instructions</h2>
+    <h3>Step 1: Prepare the Sweet Potatoes</h3>
+    <p>Start by preheating your oven to 375°F (190°C). Wash and peel the sweet potatoes, then cut them into chunks. Place the sweet potato chunks in a large pot, cover them with water, and bring to a boil. Cook until the sweet potatoes are tender, about 15-20 minutes. Drain the water and return the sweet potatoes to the pot.</p>
+
+    <h3>Step 2: Mash and Season</h3>
+    <p>Using a potato masher or an electric mixer, mash the sweet potatoes until smooth. Add the butter, brown sugar, milk, vanilla extract, cinnamon, and salt. Mix until all the ingredients are well combined and the mixture is creamy.</p>
+
+    <h3>Step 3: Assemble the Casserole</h3>
+    <p>Transfer the sweet potato mixture to a greased 9x13-inch baking dish. Spread it out evenly with a spatula. Sprinkle the mini marshmallows over the top, covering the entire surface of the casserole.</p>
+
+    <h3>Step 4: Bake to Perfection</h3>
+    <p>Place the casserole in the preheated oven and bake for 20-25 minutes, or until the marshmallows are golden brown and slightly melted. Keep an eye on the casserole during the last few minutes to prevent the marshmallows from burning.</p>
+
+    <h3>Step 5: Serve and Enjoy</h3>
+    <p>Remove the casserole from the oven and let it cool for a few minutes before serving. This dish pairs beautifully with roasted turkey, ham, or any other holiday main course. It’s also delicious on its own as a sweet treat!</p>
+
+    <h2>Nutritional Information</h2>
+    <p>Sweet potatoes are not only delicious but also packed with nutrients. They are an excellent source of vitamin A, vitamin C, and fiber. This gluten-free casserole is a healthier alternative to traditional versions, especially when made with minimal added sugar and butter. Here’s a breakdown of the nutritional content per serving:</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Nutrient</th>
+                <th>Amount per Serving</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Calories</td>
+                <td>250</td>
+            </tr>
+            <tr>
+                <td>Total Fat</td>
+                <td>8g</td>
+            </tr>
+            <tr>
+                <td>Saturated Fat</td>
+                <td>5g</td>
+            </tr>
+            <tr>
+                <td>Cholesterol</td>
+                <td>20mg</td>
+            </tr>
+            <tr>
+                <td>Sodium</td>
+                <td>150mg</td>
+            </tr>
+            <tr>
+                <td>Total Carbohydrates</td>
+                <td>42g</td>
+            </tr>
+            <tr>
+                <td>Dietary Fiber</td>
+                <td>4g</td>
+            </tr>
+            <tr>
+                <td>Sugars</td>
+                <td>25g</td>
+            </tr>
+            <tr>
+                <td>Protein</td>
+                <td>2g</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="faq">
+        <h2>Frequently Asked Questions (FAQs)</h2>
+        <h3>Can I make this casserole ahead of time?</h3>
+        <p>Yes, you can prepare the sweet potato mixture up to a day in advance and store it in the refrigerator. When you’re ready to bake, simply add the marshmallows and bake as directed.</p>
+
+        <h3>Can I use dairy-free ingredients?</h3>
+        <p>Absolutely! You can substitute the butter and milk with your favorite dairy-free alternatives, such as coconut oil and almond milk, to make this casserole completely dairy-free.</p>
+
+        <h3>What can I use instead of marshmallows?</h3>
+        <p>If you prefer not to use marshmallows, you can top the casserole with a gluten-free crumble made from oats, brown sugar, and butter. This adds a delightful crunch to the dish.</p>
+
+        <h3>How do I store leftovers?</h3>
+        <p>Leftovers can be stored in an airtight container in the refrigerator for up to 3 days. Reheat in the oven or microwave before serving.</p>
+    </div>
+
+    <h2>Conclusion</h2>
+    <p>This gluten-free sweet potato casserole with marshmallow is a must-try for anyone looking to enjoy a classic holiday dish without the gluten. It’s easy to make, packed with flavor, and sure to be a hit at your next gathering. Whether you’re hosting a large family dinner or a small holiday feast, this casserole will bring warmth and joy to your table. So, gather your ingredients, preheat your oven, and get ready to create a dish that will become a new tradition in your home.</p>
+
+</body>
+</html>
+```
+            <a href="/" class="back-link">Back to Home</a>
+        </div>
+    </body>
+    </html>
+    

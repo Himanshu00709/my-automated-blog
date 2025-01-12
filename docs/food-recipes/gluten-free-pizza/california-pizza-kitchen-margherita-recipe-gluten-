@@ -1,0 +1,223 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>california pizza kitchen margherita recipe gluten free pizza</title>
+        <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background: hsl(210, 29%, 24%);
+                font-family: "Figtree", sans-serif;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+            }
+            .container {
+                background: hsl(0, 0%, 100%);
+                max-width: 800px;
+                margin: 20px;
+                padding: 20px;
+                border: solid 1px hsl(0, 0%, 7%);
+                border-radius: 20px;
+                box-shadow: 12px 12px 10px -6px rgba(0,0,0,1);
+            }
+            h1 {
+                color: #2c3e50;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            h2 {
+                color: #34495e;
+                margin-top: 30px;
+                margin-bottom: 15px;
+            }
+            p {
+                color: #666;
+                margin-bottom: 20px;
+            }
+            a {
+                color: #3498db;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            .back-link {
+                display: inline-block;
+                margin-top: 20px;
+                font-size: 16px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            ```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>California Pizza Kitchen Margherita Gluten-Free Pizza Recipe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        p {
+            color: #555;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .faq {
+            margin-top: 30px;
+        }
+        .faq h3 {
+            color: #444;
+        }
+        .faq p {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<h1>California Pizza Kitchen Margherita Gluten-Free Pizza Recipe</h1>
+
+<p>Pizza lovers, rejoice! If you're on a gluten-free diet but still crave the classic flavors of a Margherita pizza, you're in for a treat. The California Pizza Kitchen (CPK) Margherita pizza is a beloved dish that combines simplicity with bold flavors. In this article, we’ll guide you through creating a gluten-free version of this iconic pizza right in your own kitchen. Whether you're a seasoned chef or a beginner, this recipe is easy to follow and promises to deliver a delicious, restaurant-quality pizza.</p>
+
+<h2>Why Choose a Gluten-Free Margherita Pizza?</h2>
+
+<p>The Margherita pizza is a timeless classic, known for its fresh ingredients and vibrant flavors. Traditionally, it consists of a thin crust topped with tomato sauce, fresh mozzarella, basil, and a drizzle of olive oil. However, for those with gluten intolerance or celiac disease, enjoying this dish can be challenging. That's where a gluten-free version comes in. By using a gluten-free pizza crust, you can savor the same delicious flavors without compromising your dietary needs.</p>
+
+<h2>Ingredients You'll Need</h2>
+
+<p>To recreate the California Pizza Kitchen Margherita Gluten-Free Pizza, you'll need the following ingredients:</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Ingredient</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Gluten-free pizza crust</td>
+            <td>1 (pre-made or homemade)</td>
+        </tr>
+        <tr>
+            <td>Tomato sauce</td>
+            <td>1/2 cup</td>
+        </tr>
+        <tr>
+            <td>Fresh mozzarella cheese</td>
+            <td>8 oz (sliced)</td>
+        </tr>
+        <tr>
+            <td>Fresh basil leaves</td>
+            <td>1/2 cup</td>
+        </tr>
+        <tr>
+            <td>Extra virgin olive oil</td>
+            <td>2 tbsp</td>
+        </tr>
+        <tr>
+            <td>Salt</td>
+            <td>To taste</td>
+        </tr>
+        <tr>
+            <td>Black pepper</td>
+            <td>To taste</td>
+        </tr>
+        <tr>
+            <td>Garlic powder</td>
+            <td>1/2 tsp</td>
+        </tr>
+        <tr>
+            <td>Crushed red pepper flakes (optional)</td>
+            <td>1/4 tsp</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Step-by-Step Instructions</h2>
+
+<h3>1. Preheat Your Oven</h3>
+<p>Start by preheating your oven to 475°F (245°C). If you're using a pizza stone, place it in the oven while it preheats to ensure it gets hot enough to crisp up the crust.</p>
+
+<h3>2. Prepare the Gluten-Free Crust</h3>
+<p>If you're using a pre-made gluten-free crust, follow the package instructions for preparation. If you're making your own, roll out the dough on a floured surface (use gluten-free flour) to your desired thickness. Transfer the crust to a pizza peel or baking sheet lined with parchment paper.</p>
+
+<h3>3. Add the Tomato Sauce</h3>
+<p>Spread the tomato sauce evenly over the crust, leaving a small border around the edges. This will help create a crispy crust. Sprinkle a pinch of salt, black pepper, and garlic powder over the sauce for added flavor.</p>
+
+<h3>4. Layer the Mozzarella</h3>
+<p>Arrange the fresh mozzarella slices evenly over the sauce. Be generous with the cheese, as it will melt and create that gooey, delicious texture we all love in a Margherita pizza.</p>
+
+<h3>5. Bake the Pizza</h3>
+<p>Carefully transfer the pizza to the preheated oven (or onto the pizza stone if using). Bake for 10-12 minutes, or until the crust is golden brown and the cheese is bubbly and slightly browned.</p>
+
+<h3>6. Add Fresh Basil and Olive Oil</h3>
+<p>Once the pizza is out of the oven, immediately top it with fresh basil leaves. Drizzle with extra virgin olive oil and, if desired, sprinkle with crushed red pepper flakes for a bit of heat.</p>
+
+<h3>7. Slice and Serve</h3>
+<p>Allow the pizza to cool for a few minutes before slicing. Serve warm and enjoy the fresh, vibrant flavors of your homemade California Pizza Kitchen Margherita Gluten-Free Pizza!</p>
+
+<h2>Tips for the Perfect Gluten-Free Margherita Pizza</h2>
+
+<ul>
+    <li><strong>Use High-Quality Ingredients:</strong> Since the Margherita pizza relies on simple ingredients, it's important to use the best quality you can find. Opt for fresh mozzarella, ripe tomatoes for the sauce, and fresh basil.</li>
+    <li><strong>Don't Overload the Toppings:</strong> Keep it simple. Overloading the pizza with too many toppings can make the crust soggy and detract from the classic Margherita flavor.</li>
+    <li><strong>Experiment with Gluten-Free Flours:</strong> If you're making your own crust, try different gluten-free flour blends to find the one that gives you the texture and taste you prefer.</li>
+</ul>
+
+<h2>FAQs</h2>
+
+<div class="faq">
+    <h3>Can I use store-bought gluten-free pizza crust?</h3>
+    <p>Yes, you can absolutely use a store-bought gluten-free pizza crust. Just make sure to follow the package instructions for preparation and baking.</p>
+
+    <h3>How do I make my own gluten-free pizza crust?</h3>
+    <p>To make your own gluten-free pizza crust, you'll need a blend of gluten-free flours (such as rice flour, almond flour, and tapioca flour), xanthan gum, yeast, water, and olive oil. Mix the ingredients, let the dough rise, then roll it out and bake according to your recipe.</p>
+
+    <h3>Can I add other toppings to this pizza?</h3>
+    <p>While the classic Margherita pizza is simple, you can certainly add other toppings if you like. Consider adding sliced tomatoes, arugula, or even a sprinkle of Parmesan cheese for extra flavor.</p>
+
+    <h3>How do I store leftover pizza?</h3>
+    <p>Store any leftover pizza in an airtight container in the refrigerator for up to 3 days. Reheat in the oven or a skillet to maintain the crust's crispiness.</p>
+</div>
+
+<h2>Conclusion</h2>
+
+<p>Creating a gluten-free version of the California Pizza Kitchen Margherita pizza is easier than you might think. With a few simple ingredients and some careful preparation, you can enjoy a delicious, gluten-free pizza that rivals any restaurant offering. Whether you're cooking for yourself or sharing with friends and family, this recipe is sure to impress. So, roll up your sleeves, preheat that oven, and get ready to enjoy a slice of pizza heaven!</p>
+
+</body>
+</html>
+```
+            <a href="/" class="back-link">Back to Home</a>
+        </div>
+    </body>
+    </html>
+    
